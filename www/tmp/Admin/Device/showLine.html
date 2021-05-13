@@ -1,0 +1,91 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con" >
+        <dl class="nav">
+            <dt><b>●</b>设备管理</dt>
+            <dd class="bg"><a href="{:U('Device/status')}"><b>●</b>设备状态</a></dd>
+            <dd><a href="{:U('/Admin/Device/uploadStatus')}"><b>●</b>是否上传</a></dd>
+        </dl>
+        <div class="right" style="width:88.5%;">
+             <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                             <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">设备端口</a></span>
+                            </div>
+                            <div class="aps-tab-label  aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="{:U('/Admin/Device/showLogs',array('id'=>$this_device))}">设备记录</a></span>
+                            </div>
+                           
+                    </div>
+                </div>
+            </div>
+        <include file = "./tmp/Admin/Device/top.html" />
+            <div  class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width:60px;">端口</th>
+                        <th style="width:120px;">名称</th>
+                        <th style="width:60px">状态</th>                                  
+                        <th style="width:120px;overflow-y: auto;">电话号码</th>
+                        <th style="width:60px">电压</th>
+                        <th style="width:60px">来电</th>
+                        <th style="width:60px">去电</th>
+                        <th style="width:60px">未接</th>
+                        <th style="width:60px">事件</th>
+                        <th style="width:160px">最后在线</th>
+                        <th>操作</th>
+                       
+                    </tr>
+                </table>
+            </div>
+           <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="width:60px;color:#06C;text-align: left;text-indent: 2em;">{$val['code']}</td>
+                            <td style="width:120px;"  class="wavBox ">
+                                <div id="LoginBox" class="wavbox_{$val.id}">
+                                    <input type="hidden"  class="_device_id" value='{$val['device_id']}'>
+                                    <input type="hidden"  class="_line_id" value='{$val['code']}'>
+                                    <div class="row1">
+                                        修改端口名称<a href="javascript:;" title="关闭窗口" class="close_btn" id="closeBtn" onclick="closeDiv({$val['id']})" style="color: rgb(153, 153, 153);">×</a>
+                                    </div>
+                                    <div class="row">
+                                        端口名: <span class="inputBox">
+                                            <input type="text" id="txtName" placeholder="备注名称" class="_port_name" value='{$val['PortName']}'>
+                                    </div>
+                                    <div class="row">
+                                        <a href="javascript:;" onclick="SavePortName(this);" id="loginbtn" style="opacity: 0.8;">提交</a>
+                                    </div>
+                                </div>
+                                <span class="_port_name_txt">{$val['portname']}</span>
+                            </td>
+                            <td style="width:60px" class="_line_status _line_status_<?=$val['id']?>" data-id="<?=$val['id']?>" id="_line_status_txt_<?=sprintf("%04d", $val['code'])?>" >
+                                <img src="public/status/<?=$val['case_icon']?>" height="20" align="absmiddle" title="{$val['case_text']}" /> {$val.case_text}
+                            </td>
+                            <td title = "{$val['tel']}" style="width:120px;overflow:hidden;text-overflow: hidden;" class="_line_tel_{$val['id']}">{$val['tel']}</td>
+                            <td style="width:60px" class="_line_voltage_{$val['id']}">{$val['voltage']}</td>
+                            <td style="width:60px" class="_line_comeing_{$val['id']}" align="center">{$val['comeing']}</td>
+                            <td style="width:60px" class="_line_outgoing_{$val['id']}" align="center">{$val['outgoing']}</td>
+                            <td style="width:60px" class="_line_missed_{$val['id']}" align="center">{$val['missed']}</td>
+                            <td style="width:60px" class="_line_case_{$val['id']}" align="center">{$val['case']}</td>
+                            <td style="width:160px" class="_line_last_date_<?=$val['id']?>" >{$val['last_date']}</td>
+                            <td><a href="javascript:;" onclick="updateName({$val['id']})">修改备注</a></td>
+                        </tr>
+                        </foreach>
+                    </table>
+                    
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+    function updateName($id){
+        $(".wavbox_"+$id).css('display','block');
+    }
+    function closeDiv($id){
+        $(".wavbox_"+$id).css('display','none');
+    }
+</script>

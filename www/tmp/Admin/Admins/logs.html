@@ -1,0 +1,92 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>账号管理</dt>
+            <dd class="bg"><a href="javascript:;"><b>●</b>账号管理</a></dd>
+        </dl>
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Admins/index')}">账号列表</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Admins/add')}">添加账号</a></span>
+                        </div>
+                         <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">日志列表</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Admins/logs')}">
+            	<input type="hidden" name="id" value="{$id}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 操作内容:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写账号名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="content" value="{$content}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 操作I&nbsp;&nbsp;&nbsp;&nbsp;P:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写登录账号" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="ip" value="{$ip}"></div>
+                                
+                                
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel('{:U('Admins/logs_excel')}')">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            <input type="hidden" name="gdata" id="gdata" value='{$gdata}' />
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width: 300px;">日志内容</th>
+                        <th>IP地址</th>
+                        <th>记录时间</th>
+                        <th>操作</th>
+                    </tr> 
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="width:300px;color:#06C;">{$val['content']}</td>
+                            <td>{$val.ip}</td>
+                            <td>{$val.utime|date="Y-m-d H:i:s",###}</td>
+                            <td>
+                                <a href="{:U('Admins/deleteLog',array('id'=>$val['id'],'aid'=>$id))}">删除</a>
+                            </td>
+                        </tr>
+                        </foreach>
+                    </table>
+            </div>
+            
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>

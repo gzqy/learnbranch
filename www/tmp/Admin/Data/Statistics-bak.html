@@ -1,0 +1,183 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$second_nav_id eq $vo['id']">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 10px;">
+            	选择查询方式：
+            	 <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="selectDevice(this)">设备查询</button>
+            	 <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="selectCondition(this)">条件查询</button>
+            </div>
+            <form class="clearfix search" style="display: none;" id="_form1" method="post" action="{:U('/Data/doStatistics')}">
+            	<input type="hidden" name="type" value="1">
+                <div class="filter">
+                    <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="开始时间" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$edit_time_min}" readonly></div>    
+
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="结束时间" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$edit_time_max}" readonly></div>
+                            
+                             <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">查询</button>
+                               
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+	            <div class="formation clearfix" style="margin-top: 10px;">
+	                <table>
+	                    <tr>
+	                        <th style="width:200px;"><input type="checkbox" id="selectAll">分组</th>
+	                        <th>设备</th>
+	                    </tr> 
+	                </table>
+	            </div>
+	            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;overflow-y: scroll;height:410px;">
+                    <table >
+                        <foreach name="purviews" key="key" item="val">
+                        <tr class="one">
+                            <td style="color:#06C;width:200px;"><input type="checkbox" name="gids[]" value="{$key}" > {$val['gname']}</td>
+                            <td>
+                                <?php 
+                                    unset($val['gname']);
+                                    unset($val['total']);
+                                    unset($val['inline']);
+                                    unset($val['out']);
+                                ?>
+                                <foreach name="val" item="vo">
+                                     <input type="checkbox" name="ids[]" value="{$vo.device_id}" data-name="{$vo.id}"> {$vo.name}&nbsp;
+                                </foreach>
+                            </td>
+                            
+                        </tr>
+                        </foreach>
+                    </table>
+	            </div>
+            </form>
+
+            <form class="clearfix search" style="display: none;" id="_form2" method="post" action="{:U('/Data/doStatistics')}">
+            	<input type="hidden" name="type" value="2" />
+                <div class="filter">
+                    <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请输入设备名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="device_name" value="{$device_name}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备编码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请输入设备编码" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="device_code" value="{$device_code}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 端口名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请输入端口名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="portname" value="{$portname}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 端口编码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请输入端口编码" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="port_code" value="{$port_code}"></div>
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 电话号码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="来电或者拨打的号码" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="tel" value="{$tel}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录类型:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="search_type" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                            <option value="0">选择录音类型</option>
+                                            <option value="9" <?php if ($search_type == 9) { echo 'selected'; } ?> >去电记录</option>
+                                            <option value="10" <?php if ($search_type == 10) { echo 'selected'; } ?> >来电记录</option>
+                                            <option value="11" <?php if ($search_type == 11) { echo 'selected'; } ?> >未接来电</option>
+                                            <option value="28" <?php if ($search_type == 28) { echo 'selected'; } ?> >音频记录</option>
+                                            <option value="29" <?php if ($search_type == 29) { echo 'selected'; } ?> >来电留言</option>
+                                            <option value="50" <?php if ($search_type == 50) { echo 'selected'; } ?> >现场视频</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 录音时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-three" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 录音时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-four" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                               <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 通话时长:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最小值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="min_call" value="{$min_call}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 通话时长:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最大值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="max_call" value="{$max_call}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 录音时长:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最小值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="min_recording" value="{$min_recording}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 录音时长:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最大值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="max_recording" value="{$max_recording}"></div>
+                                
+                            </div>
+                        	<div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form2').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+     $('#selectAll').click(function () {
+        var is = $("#selectAll").is(':checked');
+        if(true == is){
+            $("input[name='gids[]']").prop('checked', true);
+            $("input[name='ids[]']").prop('checked', true);
+        }else{
+             $("input[name='gids[]']").prop('checked', false);
+            $("input[name='ids[]']").prop('checked', false);
+        }
+        
+    });
+     $("input[name='gids[]']").click(function () {
+        var status = $(this).prop('checked');
+        $(this).parent().next('td').children('input[type=checkbox]').prop('checked', status);
+    });
+
+     //选择查询方式
+     function selectDevice(obj){
+     	var tmp = obj;
+     	$(".aps-btn-primary").css('background',"#00c1de");
+     	$(tmp).css('background','#ccc');
+     	$("#_form1").css('display','block');
+     	$("#_form2").css('display','none');
+     }
+     function selectCondition(obj){
+     	var tmp = obj;
+     	$(".aps-btn-primary").css('background',"#00c1de");
+     	$(tmp).css('background','#ccc');
+     	$("#_form2").css('display','block');
+     	$("#_form1").css('display','none');
+     }
+</script>

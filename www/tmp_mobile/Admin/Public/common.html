@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<tc_include file=":config"/>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--可无视-->
+<link href="__ROOT__/public/mobile/nav/css/global.css" rel="stylesheet">
+<!--必要样式-->
+<link type="text/css" href="__ROOT__/public/mobile/nav/css/style.css" rel="stylesheet">
+<link href="__ROOT__/public/mobile/nav/css/component.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__ROOT__/public/mobile/nav/js/jquery.js"></script>
+<script type="text/javascript" src="__ROOT__/public/mobile/nav/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="__ROOT__/public/mobile/nav/js/jquery.dlmenu.js"></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/public/resource/css/public.css">
+<script type="text/javascript" src="__ROOT__/public/public/js/base.js"></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/public/public/jqueryUI/ui-1.11.2/jquery-ui.min.css">
+<script type="text/javascript" src="__ROOT__/public/public/jqueryUI/ui-1.11.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="__ROOT__/public/public/dialog/dialog.js"></script>
+<link rel="stylesheet" type="text/css" href="__ROOT__/public/public/dialog/dialog.css">
+<title>{$SEO['title']}</title>
+</head>
+<body>
+  <div class="head" style="font-size:0.8rem">
+      <div class="about">
+        <div class="something" id="_all_online_box" style="float:right;margin-right:20px;">
+           <p>
+              <span >在线设备 <span id="_all_online_drive" style="margin-right: 20px"></span></span>
+              <span id="_all_online_account_box">在线账号 <span id="_all_online_account"></span></span>
+            </p>
+        </div>
+        <div class="something" style="margin-left:10px;float:left;">
+          <p><b>{$ACCOUNT.name|default="欢迎登陆"}</b><em>▼</em></p>
+        </div>
+      </div>
+      <ol class="setNav" style="background-color:white;border:1px #ccc solid;">
+        <li><a href="{:U('Admins/edit',array('id'=>$ACCOUNT['id']))}">修改密码</a></li>
+        <li><a href="{:U('Login/Logout')}">退出账号</a></li>
+    </ol>
+  </div>
+  <div id="dl-menu" class="dl-menuwrapper">
+    <button id="dl-menu-button">Open Menu</button>
+    <ul class="dl-menu">
+      <foreach name="nav" item="vo">
+        <li>
+            <a href="{$vo.a}">{$vo.name}</a>
+            <if condition="$vo.child neq null">
+              <ul class="dl-submenu">
+                <li class="dl-back"><a href="#">返回上一级</a></li>
+                <foreach name="vo.child" item="cm">
+                  <li><a href="{$cm.a}">{$cm.name}</a></li>
+                </foreach>
+              </ul>
+
+            </if>
+        </li>
+      </foreach>
+    </ul>
+  </div>
+<script type="text/javascript">
+$(function(){
+  $( '#dl-menu' ).dlmenu();
+  $('.head .about .something p').click(function(event) {
+          if($(this).children('em').html() == '▼'){
+            $(this).children('em').html('▲');
+            $('.setNav').show();
+          }else{
+            $(this).children('em').html('▼');
+            $('.setNav').hide();
+          }
+       });
+});
+</script>

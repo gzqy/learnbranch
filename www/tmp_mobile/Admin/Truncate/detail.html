@@ -1,0 +1,199 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<style type="text/css">
+#_form{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: #fff;
+    outline: 0;
+        display: block;
+        width: 100%;
+
+    padding: 0;
+ }
+.icp-content-block {
+    padding: 2px 2px;
+    margin: 0 auto;
+    width: 100%;
+    /*height:450px;*/
+}
+.icp-tipmessage-yellow {
+    border: solid 1px #fbc490;
+    background: #fffcf4;
+    color: #f96900;
+}
+.icp-tipmessage-yellow, .icp-tipmessage-yellow-multibottom, .icp-tipmessage-green {
+    display: block;
+    margin: 2px auto;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    line-height: 20px;
+    padding: 2px 2px;
+    text-align: center;
+}
+span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+.icp-form-type-block{
+    margin-top:0px;
+}
+.icp-form-type-block .icp-form-item {
+    padding: 2px 0;
+    clear: both;
+}
+.icp-form-type-block .icp-form-item-left-title {
+    float: left;
+    width: 25%;
+    text-align: center;
+    line-height: 2rem;
+    padding-left:2px;
+}
+.icp-form .i-must {
+    color: #f06;
+    margin-right: 5px;
+}
+.icp-form-type-block .icp-form-item-center-content {
+    float: left;
+    width: 75%;
+    line-height: 2rem;
+}
+.icp-form-type-block .icp-form-item-center-content .icp-form-item-text {
+    line-height: 2rem;
+    vertical-align: middle;
+}
+.icp-form-item-center-content .icp-form-item-text, .icp-form-type-block .icp-form-item-center-content .icp-form-item-textarea, .icp-form-type-block .icp-form-item-center-content .icp-form-item-select {
+    width: 100%;
+    margin: 0;
+    padding: 2px 2px;
+    border: 1px solid #CCC;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    background: #FFF url(//gtms01.alicdn.com/tps/i1/T1GNE5FiBdXXbuPdMe-950-300.gif) 0 0 no-repeat;
+    box-shadow: 0 1px 2px #f4f4f4 inset;
+    readonly;
+}
+.width-303 {
+    width: 303px !important;
+}
+body, button, input, select, textarea {
+    font-size: 12px;
+    font-family: "\5FAE\8F6F\96C5\9ED1", "Microsoft Yahei", tahoma, arial, "Hiragino Sans GB", "\5B8B\4F53";
+    color: #333;
+    resize: none;
+}
+.icp-form-type-block-bottom-operation {
+    display: block;
+    border: none;
+    width: 739px;
+    padding: 12px 0 12px 254px;
+}
+.icp-form-type-block-bottom-operation>button[class*='icp-button'], .icp-form-type-block-bottom-operation>a[class*='icp-button'] {
+    margin-right: 10px;
+}
+.icp-button-size-large {
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 24px;
+}
+.icp-button-main {
+    color: #fff;
+    border: 1px solid #00a1cc;
+    background-color: #00a1cc;
+}
+.icp-button-main, .icp-button-main-green, .icp-button-grey, .icp-button-minor, .icp-button-main-invert, .icp-button-minor-invert, .icp-button-main-netcn, .icp-button-minor-netcn {
+    display: inline-block;
+    vertical-align: middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: middle;
+}
+</style>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <div class="right">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Truncate/index')}">转写列表</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Truncate/log')}">转写日志</a></span>
+                        </div>
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">转写详情</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="_form" name="_form" action="" method="post" onsubmit="return false;">
+                <input type="hidden"  name="data[id]" value="{$device['id']}" />
+                <div class="icp-content-block">
+                    
+                    <div class="icp-tipmessage-yellow">
+                        <span>语音转写详情</span>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>设备名称 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text" class="icp-form-item-text J_must J_dwCard" readonly="readonly" value="{$device['name']}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>端口名称 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text" class="icp-form-item-text J_must J_dwCard" readonly="readonly" value="{$device_call['portname']}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>文件名称 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text" class="icp-form-item-text J_must J_dwCard" readonly="readonly" value="{$device_call['files']}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>转写时间:</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text" class="icp-form-item-text J_must J_dwCard" readonly="readonly" value="<?php echo date('Y-m-d H:i:s',$detail['time']) ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="icp-form icp-form-type-block" style="height:200px;">
+                        <div class="icp-form-item" style="height:100%;">
+                            <div class="icp-form-item-left-title" style="margin:0 auto"><em class="i-must">*</em>转写文字 :</div>
+                            <div class="icp-form-item-center-content" style="height:100%;">
+                                <textarea readonly="readonly" class="icp-form-item-textarea J_must J_dwCard" style="height:100%;text-align: left;text-indent: 2em;">{$detail['content']}
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

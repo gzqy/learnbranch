@@ -1,0 +1,272 @@
+<style type="text/css">
+        body{
+        font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, "Microsoft YaHei";
+        font-size: 12px;
+        line-height: 1.428571429;
+        color: #333333;
+    }
+*, *:before, *:after{
+    box-sizing: content-box;
+}
+.home-section-security{
+    height: 180px;
+    overflow: hidden;
+    padding: 16px 16px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+.home-section-wrap {
+    margin : 0;
+    width:100%;
+}
+.pull-left {
+    float: left;
+}
+.home-section-security {
+    height: 180px;
+    overflow: hidden;
+}
+.section-container {
+    padding: 16px 16px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+.home-section-security .security-left {
+    width: 60%;
+    display: inline-block;
+    vertical-align: top;
+}
+.section-container .container-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.home-section-security .item-vertical {
+    width: 20%;
+    height: 120px;
+    padding-right: 10px;
+    text-align: center;
+    float: left;
+}
+.home-section-security .item-content {
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+.home-block-hover {
+    background: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    -o-transition: all 0.15s, 0.15s;
+    -moz-transition: all 0.15s, 0.15s;
+    -webkit-transition: all 0.15s, 0.15s;
+}
+.home-section-security .item-vertical .item-number {
+    display: block;
+    height: 60px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.home-section-security .item-vertical .item-text {
+    display: block;
+}
+.home-section-security .item-horizontal {
+    line-height: 55px;
+    position: relative;
+}
+.home-section-security .item-horizontal {
+    width: 100%;
+    height: 55px;
+}
+.home-section-security .item-content {
+    height: 100%;
+    overflow: hidden;
+}
+.home-block-hover {
+    background: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    -o-transition: all 0.15s, 0.15s;
+    -moz-transition: all 0.15s, 0.15s;
+    -webkit-transition: all 0.15s, 0.15s;
+}
+.home-section-security .item-horizontal .item-text {
+    display: inline-block;
+    min-width: 30px;
+    margin-left: 16px;
+}
+.home-section-security .item-number-grey {
+    color: #C6D0D4 ;
+}
+.home-section-security .item-number {
+    color: #FF0000;
+    text-decoration: none;
+}
+.item-number-grey {
+    color: #C6D0D4 ;
+}
+.home-section-security .security-right {
+    width: 35%;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+}
+.home-section-security .item-horizontal {
+    line-height: 55px;
+    position: relative;
+}
+.home-section-security .item-horizontal {
+    width: 100%;
+    height: 55px;
+}
+.home-section-security .item-content {
+    height: 100%;
+    overflow: hidden;
+}
+.home-block-hover {
+    background: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    -o-transition: all 0.15s, 0.15s;
+    -moz-transition: all 0.15s, 0.15s;
+    -webkit-transition: all 0.15s, 0.15s;
+}
+.home-section-security .item-horizontal {
+    line-height: 55px;
+    position: relative;
+ }
+ .home-section-undo {
+    height: 180px;
+    width: 100%;
+}
+.section-container {
+    padding: 16px 16px;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+.section-container .container-title {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.home-section-undo .undo-item {
+    height: 38px;
+    line-height: 38px;
+    margin-bottom: 4px;
+    display: block;
+    text-decoration: none;
+}
+.home-block-hover {
+    background: #F5F5F6;
+    border: 1px solid #F5F5F6;
+    -o-transition: all 0.15s, 0.15s;
+    -moz-transition: all 0.15s, 0.15s;
+    -webkit-transition: all 0.15s, 0.15s;
+}
+a {
+    color: #00C1DE;
+}
+.home-section-undo .undo-item .item-number {
+    color: #00c1de;
+    font-size: 14px;
+    margin-left: 16px;
+}
+.home-section-undo .undo-item .item-text {
+    width: 20%;
+    padding-left: 36px;
+    color: #333;
+    display: inline-block;
+    vertical-align: top; 
+}
+</style>
+<div class="home-section-wrap clearfix" style="margin-top:10px;">
+    <div home-section-security="" style="width: 40%" class="pull-left ng-scope" >
+        <div class="section-container home-section-security" >
+            <div class="security-left">
+                <div class="container-body">
+                    <div class="container-title ng-binding" ><?php echo $device['name'] ? $device['name']  : '暂无名称';  ?></div>
+                    <div  class="container-body ng-scope">
+                        <div class="item-vertical">
+                            <div class="item-content home-block-hover">
+                                <span  class="item-number item-number-grey ng-scope ng-binding  _comeing_<?=$device['id'] ?>"><?=$device['comeing']?></span>
+                                <span class="item-text ng-binding" >来电</span>
+                            </div>
+                        </div>
+                        <div class="item-vertical">
+                            <div class="item-content home-block-hover">
+                                <span class="item-number item-number-grey ng-scope ng-binding _outgoing_<?=$device['id'] ?>"><?=$device['outgoing']?></span>
+                                <span class="item-text ng-binding" >去电</span>
+                            </div>
+                        </div>
+                        <div class="item-vertical">
+                            <div class="item-content home-block-hover">
+                                <span  class="item-number item-number-grey ng-scope ng-binding _missed_<?=$device['id'] ?>"><?=$device['missed']?></span>
+                                <span class="item-text ng-binding" >未接</span>
+                            </div>
+                        </div>
+                        <div class="item-vertical">
+                            <div class="item-content home-block-hover">
+                                <span  class="item-number item-number-grey ng-scope ng-binding _case_<?=$device['id'] ?>"><?=$device['case']?></span>
+                                <span class="item-text ng-binding" >事件</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="security-right">
+                <div class="container-title ng-binding" >
+                    <span class="_status _status_<?= $device['id'] ?>" data-id="<?= $device['id'] ?>"><?php if ($device['status']) { ?><span class="type label Online"><img src="./public/resource/images/online.png" width=14% title='在线'></span><?php } else { ?><span class="type label Offline"><img src="./public/resource/images/off.png" width=14% title="离线"></span><?php } ?></span>
+                </div>
+                <div class="container-body" >
+                    <div class="item-horizontal" style="margin-bottom: 10px">
+                        <div class="item-content home-block-hover" style="text-align: left;">
+                            <span class="item-text ng-binding" >设备端口</span> 
+                            <span  class="item-number item-number-grey ng-scope ng-binding"><?= $device['line'] ?></span>
+                        </div>
+                    </div>
+                    <div class="" style="height: 60px">
+                        <div class="item-content home-block-hover" style="text-align: left;">
+                            <span class="item-text ng-binding" >设备IP</span> 
+                            <span  class="item-number item-number-grey ng-scope ng-binding _IP_<?=$device['id'] ?>"><?= $device['ip'] ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="width:60%" class="pull-left">
+        <div home-section-undo="" style="padding-left: 16px;width: 45%" class="pull-left ng-scope" >
+            <div class="section-container home-section-undo" >
+                <div class="container-title ng-binding">设备信息</div>
+                <div class="container-body">
+                    <a class="undo-item home-block-hover" target="_blank" >
+                        <span class="item-text ng-binding">注册时间</span>
+                        <span class="item-number ng-binding item-number-grey" >{$device['add_time']|default='未获取'|date="Y-m-d H:i:s",###}</span>
+                    </a>
+                    <a  class="undo-item home-block-hover" target="_blank" >
+                        <span class="item-text ng-binding">软件版本</span> 
+                        <span class="item-number ng-binding item-number-grey _version_<?=$device['id'] ?>" ><?=$device['version']?></span>
+                    </a>
+                    <a class="undo-item home-block-hover">
+                        <span class="item-text ng-binding">最后在线</span> 
+                        <span class="item-number ng-binding item-number-grey _device_time_<?=$device['device_id'] ?>"><?=$device['device_time']?></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div home-section-undo="" style="padding-left: 16px;width: 40%;margin-left:5%;" class="pull-left ng-scope" >
+            <div class="section-container home-section-undo" >
+                <div class="container-title ng-binding">设备状况</div>
+                <div class="container-body">
+                    <a class="undo-item home-block-hover" target="_blank" >
+                        <span class="item-text ng-binding">CPU</span>
+                        <span class="item-number ng-binding item-number-grey _CPU_<?=$device['id'] ?>" ><?=$device['cpu']?></span>
+                    </a>
+                    <a  class="undo-item home-block-hover" target="_blank" >
+                        <span class="item-text ng-binding">内存</span> 
+                        <span class="item-number ng-binding item-number-grey _Store_<?=$device['id'] ?>" ><?=$device['mem']?></span>
+                    </a>
+                    <a class="undo-item home-block-hover" >
+                        <span class="item-text ng-binding">存储</span> 
+                        <span class="item-number ng-binding item-number-grey _Mem_<?=$device['id'] ?>"><?=$device['store']?></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>权限管理</dt>
+            <dd class="bg"><a href="javascript:;"><b>●</b>权限管理</a></dd>
+        </dl>
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">权限列表</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Auth/add')}">添加规则</a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Auth/index')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 规则名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写规则名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="name" value="{$name}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 添加时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="add_time_min" value="{$add_time_min}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 添加时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="add_time_max" value="{$add_time_max}" readonly></div>
+                                
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 模块名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写模块名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="app" value="{$app}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 控制名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写控制器名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="model" value="{$model}"></div>
+                                
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 方法名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写方法名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="action" value="{$action}"></div>
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 编辑时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-three" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="edit_time_min" value="{$edit_time_min}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 编辑时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-four" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="edit_time_max" value="{$edit_time_max}" readonly></div>
+                                
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel()">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th>规则名称</th>
+                        <th>模块名称</th>
+                        <th>控制器名称</th>
+                        <th>方法名称</th>
+                        <th>添加时间</th>
+                        <th>编辑时间</th>
+                        <th>操作</th>
+                    </tr> 
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="color:#06C;">{$val['name']}</td>
+                            <td>{$val.app}</td>
+                            <td>{$val.model}</td>
+                            <td>{$val.action}</td>
+                            <td>{$val.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td>{$val.edit_time|date="Y-m-d H:i:s",###}</td>
+                            <td  >
+                                <a href="{:U('/Auth/edit',array('id'=>$val['id']))}">编辑</a><i>|</i>
+                                <a href="{:U('Auth/delete',array('id'=>$val['id']))}">删除</a>
+                            </td>
+                        </tr>
+                        </foreach>
+                    </table>
+            </div>
+            
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+    //导出表格
+    function excel(){
+        var url = "{:U('Auth/index_excel',array('name'=>$name,'app'=>$app,'model'=>$model,'action'=>$action,'add_time_min'=>$add_time_min,'add_time_max'=>$add_time_max,'edit_time_min'=>$edit_time_min,'edit_time_max'=>$edit_time_max,'excel'=>1))}";
+        location.href=url;
+        
+    }
+</script>

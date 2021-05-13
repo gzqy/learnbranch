@@ -1,0 +1,29 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>语音转写</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                    <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right">
+            <iframe style="width: 100%;height: 700px" src="./html_pic/质检报表 - 智能销售语音分析平台.html"></iframe>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript">
+    //导出表格
+    function excel(){
+        var url = "{:U('Truncate/index_excel',array('start_date'=>$start_date,'end_date'=>$end_date,'keywords'=>$keywords,'excel'=>1))}";
+        location.href=url;
+        
+    }
+</script>

@@ -1,0 +1,165 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <!--<dl class="nav">-->
+            <!--<dt><b>●</b>设备管理</dt>-->
+            <!--<dd class="bg"><a href="javascript:;"><b>●</b>设备状态</a></dd>-->
+        <!--</dl>-->
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                            <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">全部设备</a></span>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Admin/DeviceApp/status')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写设备名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="name" value="{$name}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备分组:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="group_id"  class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" style="padding: 4px;">
+                                        <option class="option" value='0'>全部分组</option>
+                                        <foreach name="groups" item="val" key="key">
+                                            <if condition="$group_id eq $key">
+                                                <option class="option" value="{$key}" selected="selected">{$val}</option>
+                                            <else />
+                                                <option class="option" value="{$key}">{$val}</option>
+                                            </if>
+                                        </foreach>
+                                    </select>
+                                </div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关键名词:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写关键名词" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="keywords" value="{$keywords}"></div>
+                                
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备编码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写设备编码" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="code" value="{$code}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                                
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel()">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <!--<div class="formation clearfix" style="margin-top: 10px;">-->
+                <!--<table>-->
+                    <!--<tr>-->
+                        <!--<th style="width:100%;">设备名称</th>-->
+                        <!--<th style="width:100%;">设备编码</th>-->
+                        <!--<th style="width:100%;">关注</th>-->
+                        <!--<th style="width:100%;">来电</th>-->
+                        <!--<th style="width:100%;">去电</th>-->
+                        <!--<th style="width:100%;">未接</th>-->
+                        <!--<th style="width:100%;">注册时间</th>-->
+                        <!--<th >更新时间</th>-->
+                        <!--<th  style="">查看设备</th>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--</div>-->
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="width:100%;">
+                            <div style="width: 100%;">名称 {$val['name']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div style="width: 100%;">
+                            <span>来电：
+                               {$val['comeing']}
+                            </span>去电：
+                                <span style="margin-left:5px;">
+                                {$val['outgoing']}
+                            </span>
+                                <span style="margin-left:5px;">
+                                    未接：
+                                {$val['missed']}
+                            </span>
+                            </div>
+
+                            <div style="width:100%;">更新时间： {$val['upd_time']|date="Y-m-d H:i:s",###}  </div>
+                            <div style="width: 100%;">
+                                <a href="{:U('Admin/DeviceApp/showLogs',array('id'=>$val['id']))}">记录</a>
+                            </div>
+                            </td>
+                        </tr>
+                            <!--<tr class="one">-->
+                                <!--<td style="width:100%;color:#06C;text-align: left;text-indent: 2em;">{$val['name']}</td>-->
+                                <!--<td style="width:100%;">{$val.code}</td>-->
+                                <!--<td style="width:100%;">-->
+                                    <!--<if condition="$val['attention'] eq 1">-->
+                                        <!--<i class="gold star icon" onclick="Attention({$val['id']})" ></i>-->
+                                        <!--<else />-->
+                                        <!--<i class="empty gray star icon " onclick="Attention({$val['id']})"></i>-->
+                                    <!--</if>-->
+
+                                <!--</td>-->
+                                <!--<td style="width: 100%;">-->
+                                    <!--{$val['comeing']}-->
+                                <!--</td>-->
+                                <!--<td style="width: 100%;">-->
+                                    <!--{$val['outgoing']}-->
+                                <!--</td>-->
+                                <!--<td style="width:100%;">-->
+                                    <!--{$val['missed']}-->
+                                <!--</td>-->
+                                <!--<td style="width:100%;">{$val['add_time']|date="Y-m-d H:i:s",###}</td>-->
+                                <!--<td style="width: 100%;">{$val['upd_time']|date="Y-m-d H:i:s",###}</td>-->
+                                <!--<td  style="width: 100%;">-->
+                                    <!--<a href="{:U('Admin/DeviceApp/showLogs',array('id'=>$val['id']))}">记录</a>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        </foreach>
+                    </table>
+            </div>
+            
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device_app.js"></script>
+<script type="text/javascript">
+    //导出表格
+    function excel(){
+        var name = "{$name}";
+        var code = "{$code}";
+        var group_id = "{$group_id}";
+        var keywords = "{$keywords}";
+        var start_date = "{$start_date}";
+        var end_date = "{$end_date}";
+        var status = "{$status}";
+        var excel = 1;
+        var url = "{:U('DeviceApp/status_excel',array('name'=>$name,'code'=>$code,'group_id'=>$group_id,'keywords'=>$group_id,'start_date'=>$start_date,'end_date'=>$end_date,'excel'=>1,'status'=>$status))}";
+        location.href=url;
+        
+    }
+</script>

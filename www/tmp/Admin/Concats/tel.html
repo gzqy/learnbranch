@@ -1,0 +1,450 @@
+<include file="./tmp/Admin/Public/common.html"/>
+<include file="./tmp/Admin/Public/list.html"/>
+<script>
+    var needCrmTelLayer = 1;
+</script>
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>客户管理</dt>
+         
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                    <else/>
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+
+            </foreach>
+
+        </dl>
+        <div class="right">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">客户列表</a></span>
+                        </div>
+
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Concats/add')}">添加客户</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Concats/index')}">
+                <div class="filter">
+                    <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                                 style="padding: 8px;"> 客户名称:
+                            </div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;"><input type="text" placeholder="请填写名称"
+                                                              class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                              name="name" value="{$name}"></div>
+
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                                 style="padding: 8px;"> 客户电话:
+                            </div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;"><input type="text" placeholder="请填写电话"
+                                                              class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                              name="tel1" value="{$tel1}"></div>
+
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                                 style="padding: 8px;"> 客户分组:
+                            </div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;">
+                                <select name="group_id"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                    <option value="0">所有分组</option>
+                                    <foreach name="groups" key="key" item="vo">
+                                        <if condition="$vo.id eq $group_id">
+                                            <option selected value="{$vo.id}">{$vo.name}</option>
+                                            <else/>
+                                            <option value="{$vo.id}">{$vo.name}</option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <!--
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 客户来源:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;">
+                              <select name="source_id"
+                                      class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                  <option value="0">所有来源</option>
+                                  <foreach name="sourceList" key="key" item="vo">
+                                      <if condition="$vo.id eq $source_id">
+                                          <option selected value="{$vo.id}">{$vo.name}</option>
+                                          <else/>
+                                          <option value="{$vo.id}">{$vo.name}</option>
+                                      </if>
+                                  </foreach>
+                              </select>
+                          </div>
+                      </div>
+
+                      <div style="display: none" class="aps-ani-transition aps-grid-row aps-state-visible">
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 客户性别:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;">
+                              <select name="gender"
+                                      class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                  <option value="0">选择性别</option>
+                                  <option value="1"
+                                  <if condition="$gender eq 1">selected</if>
+                                  >男</option>
+                                  <option value="2"
+                                  <if condition="$gender eq 2">selected</if>
+                                  >女</option>
+                              </select>
+                          </div>
+
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 注册时间:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值"
+                                                            class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                            name="add_start_date" value="{$add_start_date}" readonly>
+                          </div>
+
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 注册时间:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值"
+                                                            class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                            name="add_end_date" value="{$add_end_date}" readonly>
+                          </div>
+                      </div>
+
+                      <div style="display: none" class="aps-ani-transition aps-grid-row aps-state-visible">
+
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 更新时间:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;"><input type="text" id="start-three" placeholder="最小值"
+                                                            class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                            name="upd_start_date" value="{$upd_start_date}" readonly>
+                          </div>
+
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                               style="padding: 8px;"> 更新时间:
+                          </div>
+                          <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                               style="padding: 8px;"><input type="text" id="start-four" placeholder="最大值"
+                                                            class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                            name="upd_end_date" value="{$upd_end_date}" readonly>
+                          </div>
+
+                      </div>-->
+                       <!-- <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;">
+                                客户意向：
+                                <select id="form_feedback" name="form_feedback" style="width: 100px"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                   <option value="0">全部</option>
+                                    <foreach name="feedbackType" key="key" item="vo">
+                                        <if condition="$key eq $feedbackTypeForm">
+                                            <option selected value="{$key}">{$vo}</option>
+                                            <else/>
+                                            <option value="{$key}">{$vo}</option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;">
+                                重要程度：
+                                <select id="importantLevel" name="important_level" style="width: 100px"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                    <option value="0">全部</option>
+                                    <foreach name="importantLevelList" key="key" item="vo">
+                                        <if condition="$key eq $importantLevel">
+                                            <option selected value="{$key}">{$vo}</option>
+                                            <else/>
+                                            <option value="{$key}">{$vo}</option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                 style="padding: 8px;">
+                                是否已拨：
+                                <select id="form_is_dailed" name="form_is_dailed" style="width: 100px"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                    <foreach name="option_is_dailed" key="key" item="vo">
+                                        <if condition="$key eq $form_is_dailed">
+                                            <option selected value="{$key}">{$vo}</option>
+                                            <else/>
+                                            <option value="{$key}">{$vo}</option>
+                                        </if>
+                                    </foreach>
+                                </select>
+                            </div>
+                            <if condition="$isAdmin">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                     style="padding: 8px;">
+                                    分配状态:
+                                    <select id="form_select_userid" name="form_select_userid" style="width: 100px"
+                                            class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                        <option value="0">全部</option>
+                                        <option value="-1"
+                                        <?php if($form_select_userid==-1) {echo "selected";} ?> >未分配</option>
+                                        <option value="-2"
+                                        <?php if($form_select_userid==-2) {echo "selected";} ?>>已分配</option>
+                                        <foreach name="users" key="key" item="vo">
+                                            <if condition="$vo.id eq $form_select_userid">
+                                                <option selected value="{$vo.id}">{$vo.name}</option>
+                                                <else/>
+                                                <option value="{$vo.id}">{$vo.name}</option>
+                                            </if>
+                                        </foreach>
+                                    </select>
+                                </div>
+                            </if>
+                        </div>-->
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button "
+                                 style="padding: 8px;">
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn"
+                                        onclick="$('#_form1').submit();">搜索
+                                </button>
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn"
+                                        onclick="$('input').val('')">重置
+                                </button>
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn"
+                                        onclick="excel('{:U('Concat/index_excel')}')">导出列表
+                                </button>
+                                <!--上传通讯文件：<input  type="file" placeholder="导入客户" onclick="$('#file').val('')" onchange="import_excel('{:U('Concat/import_excel')}')" id="file" name="filename" />-->
+                                <label style="position: relative;" for="file">
+                                    <input type="button"
+                                           style="padding: 5px 10px; margin-bottom: 7px;margin-left: 5px; background: #00c1de;color: #FFF;border: none;"
+                                           id="btn" value="导入客户"><span style="margin-left: 5px" id="text"></span>
+                                    <input type="file" style="position: absolute;left: 0;top: 0;opacity: 0;"
+                                           onclick="$('#file').val('')"
+                                           onchange="import_excel('{:U('Concat/import_excel')}')" id="file"
+                                           name="filename">
+                                </label>
+
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn"
+                                        onclick="window.open('./public/CSV/导入通讯模板.xlsx')">导出模板
+                                </button>
+                                <!--<br/>-->
+                            </div>
+                        </div>
+                        <div id="dial_info" style="display: none" class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button "
+                                 style="padding: 8px;">
+                                &nbsp&nbsp&nbsp&nbsp 拨号地址：<input style="width: 120px"
+                                                                 class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                                                 id="ws_address" type="text" name="ws_address"
+                                                                 value="{$wsConfig.ws_address}">
+                                端口编号：<input style="width: 50px"
+                                            class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                            id="ws_line" type="text" name="ws_line" value="{$wsConfig.ws_line}">
+                                交换机按键：<input style="width: 50px"
+                                             class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                             id="switch_num" type="text" name="switch_num"
+                                             value="{$wsConfig.switch_num}">
+                                <!--归属地：<select id="district_id" name="district_id" style="width: 100px" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">-->
+                                <!--<option value="0">请选择</option>-->
+                                <!--<foreach name="district" key="key" item="vo">-->
+                                <!--<if condition="$vo.id eq $wsConfig.district_id">-->
+                                <!--<option selected value="{$vo.id}">{$vo.district_name}</option>-->
+                                <!--<else />-->
+                                <!--<option value="{$vo.id}">{$vo.district_name}</option>-->
+                                <!--</if>-->
+                                <!--</foreach>-->
+                                <!--</select>-->
+                                区号：<input style="width: 50px"
+                                          class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                          id="district_code" type="text" name="district_code"
+                                          value="{$wsConfig.district_code}">
+                            </div>
+                        </div>
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button "
+                                 style="padding: 8px;">
+                                电话号码：<input style="width: 120px"
+                                            class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                                            id="tel" type="text" name="tel" value="{$tel}">
+                              <!--  <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn"
+                                        onclick="ws_contact(-1,'{:U('Concat/wsConnectBefore')}')">设备拨号
+                                </button>
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn"
+                                        onclick="if($('#dial_info').is(':hidden')){$('#dial_info').show()}else{$('#dial_info').hide()}">显示/隐藏拨号信息
+                                </button>-->
+
+                                <button type="button"
+                                        class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn"
+                                        onclick="Calltel('{:U('Test/addPush')}',<?php echo  $_SESSION['ACCOUNTS']['tel']?>)">手机拨号
+<!--                                        onclick="ws_cont($_SESSION['ACCOUNTS']['tel'],'{:U('Test/addPush')}')">设备拨号-->
+
+                                    <!--                                    <a href="{:U('/Test/addPush',array('tel'=>$_SESSION['ACCOUNTS']['tel'],'phone'=>$val['tel1'],'type'=>call))}">-->
+
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button "
+                                 style="padding: 8px;">
+                                <if condition="$isAdmin">
+                                    <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                                         style="padding: 8px;"> 选择分配账号:
+                                    </div>
+                                    <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible"
+                                         style="padding: 8px;">
+                                        <select id="select_userid" name="select_userid" style="width: 100px"
+                                                class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                            <option value="0">选择账号</option>
+                                            <foreach name="users" key="key" item="vo">
+                                                <if condition="$vo.id eq $select_userid">
+                                                    <option selected value="{$vo.id}">{$vo.name}</option>
+                                                    <else/>
+                                                    <option value="{$vo.id}">{$vo.name}</option>
+                                                </if>
+                                            </foreach>
+                                        </select>
+                                    </div>
+                                    <button class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn"
+                                            style="margin-top: 10px" type="button"
+                                            onclick="telToAccount('{:U('Concat/telToAccount')}',0)">分配
+                                    </button>
+                                    <button class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn"
+                                            style="margin-top: 10px" type="button"
+                                            onclick="telToAccount('{:U('Concat/telToAccount')}',1)">取消分配
+                                    </button>
+                                </if>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" id="limit" name="limit" value="{$limit}" hidden>
+            </form>
+            <input type="hidden" name="gdata" id="gdata" value='{$gdata}'/>
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width: 50px"><input type="checkbox" id="allSelect" onclick="allSelect()"></th>
+                        <th style="width:120px">名称</th>
+                        <th style="width: 120px;">电话</th>
+                        <th>性别</th>
+                        <th>分组</th>
+<!--                        <th>来电</th>-->
+<!--                        <th>去电</th>-->
+<!--                        <th>未接</th>-->
+                        <!--<th>注册时间</th>-->
+                        <!--<th>更新时间</th>-->
+                        <!--<th>是否已拨</th>-->
+                        <th>用户拨号</th>
+<!--                        <th style="width: 100px">客户意向</th>-->
+<!--                        <th>重要程度</th>-->
+<!--                        <th>分配管理员</th>-->
+                        <th style="width:200px">客户管理</th>
+                    </tr>
+                </table>
+            </div>
+
+            <form id="_form" name="_form" action="/device/setGroup" method="post" onsubmit="return false;">
+                <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table>
+                        <?php $sourceList1=array_column($sourceList,'name','id'); ?>
+                        <foreach name="data" key="key" item="val">
+                            <tr class="one">
+                                <td style="width: 50px"><input type="checkbox" class="J_check _ids" name="ids[]"
+                                                               value="{$val['id']}"></td>
+                                <td onclick="crm_show({$val['id']})" style="cursor:pointer;color:#06C;width:120px">
+                                    {$val['name']}
+                                </td>
+                                <!--<td>{$val.tel1}</td>-->
+                                <td style="cursor:pointer;width: 120px">{$val.tel1}
+                                </td>
+<!--                                onclick="ws_contact({$val['id']},'{:U('Concat/wsConnectBefore')}')"-->
+
+
+                                <td>
+                                    <?php if($val['gender']==1):
+                                    echo "男";
+                                elseif($val['gender']==2):
+                                    echo "女";
+                                else:
+                                    echo "保密";
+                                endif
+                            ?>
+                                </td>
+                                <td>{$val.gname}</td>
+<!--                                <td>{$val.comeing}</td>-->
+<!--                                <td>{$val.outgoing}</td>-->
+<!--                                <td>{$val.missed}</td>-->
+                                <!--<td>{$val.add_time}</td>-->
+                                <!--<td>{$val.upd_time}</td>-->
+<!--                                <td><?php echo (string)$sourceList1[$val['source_id']] ?></td>-->
+                                <td>
+								<!--<a href="javascript:;"
+                                   onclick="ws_contact({$val['id']},'{:U('Concat/wsConnectBefore')}')">座机</a><i>|</i>-->
+                                <a href="{:U('/Test/addPush',array('tel'=>$_SESSION['ACCOUNTS']['tel'],'phone'=>$val['tel1'],'type'=>call))}">手机</a></td>
+                                <!--<td id="is_dailed_<?=$val['id']?>"><?=$val['is_dailed']==1?'是':'否';?></td>-->
+<!--                                <td style="width: 100px"><?php echo (string)$feedbackType[$val['feedback_type']] ?></td>-->
+                                <!--<td style="width: 100px">-->
+                                    <!--<select id="select_feedback_<?=$val['id']?>"-->
+                                            <!--onchange="feedbackChange('{:U('/Concat/changeFeedBack')}','select_feedback_<?=$val['id']?>',<?=$val['id']?>)"-->
+                                            <!--style="width: 90px" class="">-->
+                                        <!--<?php foreach ($feedbackType as $key=>$vo):?>-->
+                                        <!--<?php if($key==$val['feedback_type']){ ?>-->
+                                        <!--<option selected value="{$key}"><?=$vo?></option>-->
+                                        <!--<?php }elseif($key>0){ ?>-->
+                                        <!--<option value="<?=$key?>"><?=$vo?></option>-->
+                                        <!--<?php }?>-->
+                                        <!--<?php endforeach;?>-->
+                                    <!--</select>-->
+                                <!--</td>-->
+<!--                                <td><?php echo $importantLevelList[$val['important_level']] ?></td>-->
+<!--                                <td>{$val.contactAccounts}</td>-->
+                                <td style="width:200px">
+                                    <a href="{:U('/Concats/add',array('id'=>$val['id']))}">编辑</a><i>|</i>
+                                    <a href="javascript:;" onclick="ConcatRemove({$val['id']})">删除</a>
+
+                                    <!--<a href="javascript:;" onclick="ws_contact({$val['id']},'{:U('Concat/wsConnectBefore',['dialLocal'=>1])}')">本地拨号</a>-->
+                                </td>
+                            </tr>
+                        </foreach>
+                    </table>
+                </div>
+            </form>
+
+            <div class="pages" style="font-size: 14px;">
+                每页条数<input type="text" id="limit1" value="{$limit}" style="width: 40px">
+                <button onclick="document.getElementById('limit').value=document.getElementById('limit1').value;document.getElementById('_form1').submit()">
+                    确定
+                </button>
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file="./tmp/Admin/Public/list_js.html"/>
+<script type="text/javascript" src="./public/resource/js/concat.js"></script>
+<include file="./tmp/Admin/Crm/index.html"/>
+<script>
+//    dialog.tip();
+</script>

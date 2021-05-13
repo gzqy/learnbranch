@@ -1,0 +1,122 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">设备列表</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('DeviceCT/NregIndex')}">未注册设备</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('DeviceCT/add')}">添加设备</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/DeviceCT/index')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写账号名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="name" value="{$name}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备编码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写登录账号" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="code" value="{$code}"></div>
+                                
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备分组:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="group_id" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                        <option value="0">所有分组</option>
+                                        <foreach name="groups" key="key" item="vo">
+                                            <if condition="$key eq $group_id">
+                                                <option selected value="{key}">{$vo}</option>
+                                            <else />
+                                                <option value="{$key}">{$vo}</option>
+                                            </if>
+                                        </foreach>    
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关键名词:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写关键名词" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="keywords" value="{$keywords}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 注册时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 注册时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button " style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel('{:U('DeviceCT/index_excel')}')">导出列表</button>
+                                     <select class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" name="group" id="group">
+                                        <option value="0">设备批量分组</option>
+                                        <foreach name="groups" key="key" item="vo">
+                                            <option value="{$key}">{$vo}</option>
+                                        </foreach>  
+                                    </select>
+                                    <button class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" type="button"  onclick="deleteAllDevice();">批量删除</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            <input type="hidden" name="gdata" id="gdata" value='{$gdata}' />
+            <form id="_form" name="_form" action="/device/setGroup" method="post" onsubmit="return false;">
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                <table >
+                    <foreach name="data" key="key" item="val">
+                    <tr class="one">
+                        <td style="width:100%;">
+                            <div style="width: 100%;">
+                                选择 <input type="checkbox" class="J_check _ids" name="ids[]" value="{$val['id']}"> &nbsp;
+                                名称 {$val['name']}&nbsp;
+                                编码 {$val.code} &nbsp;
+                                端口 {$val.line}
+                                
+                                </div>
+                                <div style="width: 100%;">
+                                    分组 {$val.gname}
+                                    <span>来电：<span class="_comeing_{$val['id']}" >{$val['comeing']}</span>  
+                                    <span style="margin-left:5px;">
+                                    去电：<span class="_outgoing_<?=$val['device_id'] ?>" >{$val['outgoing']}</span></span>
+                                    <span style="margin-left:5px;">
+                                    未接：<span class="_missed_<?=$val['device_id'] ?>" >{$val['missed']}</span> </span>
+                                    <span style="margin-left:5px;">事件：<span class="_case_{$val['id']}" >{$val['case']}</span></span>
+                                </div>
+                                <div style="width: 100%;">
+                                     <a href="javascript:void(0);" onclick="upload(<?=$val['id']?>);">升级</a><i>|</i>
+                                <a href="{:U('/DeviceCT/add',array('id'=>$val['id']))}">编辑</a><i>|</i>
+                                <a href="javascript:;" onclick="DeviceRemove({$val['id']})">删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </foreach>
+                </table>
+            </div>
+            </form>
+
+            <form id="_up_form" name="_up_form" method="post" action="/DeviceCT/updatefile" target="newFramed" enctype="multipart/form-data">
+                <input type="file" name="upfile" style="display:none;" >
+                <input type="hidden" name="upfile_id" id="_upfile_id" value="0" >
+            </form>
+            
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>

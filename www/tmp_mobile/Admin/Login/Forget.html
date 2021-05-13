@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <include file = "./tpl_admin/simpleboot/Public/Head.html" />
+    </head>
+    <body>
+        <div class="page">
+            <!--header begin-->
+            <header>
+                <div class="bigcontainer">
+                    <div id="logo">
+                        <a href="./"><img src="{$SEO['logo']}" height="50"></a>
+                    </div>
+
+                </div>
+            </header>
+            <!-- the main menu-->
+            <div class="ui teal inverted menu">
+                <div class="bigcontainer">
+                    <div class="right menu" style="height:45px;">
+
+
+                    </div>
+                </div>
+            </div>
+            <!--the main content begin-->
+            <div class="container">
+                <!--the content-->
+                <div class="ui grid">
+                    <div class="one column row">
+                        <div class="column" >
+
+                            <div style="margin:50px auto;width:600px;">
+
+                                <form class="ui form segment"  id="_login_form" name="_login_form" action="/Login/Forget" method="post" onsubmit="return false;"   >
+
+                                    <div class="field">
+                                        <label>账号邮箱</label>
+                                        <div class="ui left icon input">
+                                            <i class="mail icon"></i>
+                                            <input type="text" name="email" >
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>验证码</label>
+                                        <div class="ui left icon input">
+                                            <i class="shield icon"></i>
+                                            <input type="text" name="code" style="width:200px" >
+                                            <img src="{:U('Login/Login/validatecode')}" style='vertical-align: middle;cursor: pointer' onclick="this.src=this.src+'&time='+Math.random();" id="_Validate_Code">
+                                        </div>
+                                    </div>
+                                    <div class="ui blue button" style="padding: 10px 50px" onclick="Login();">
+                                        找回密码
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <link rel="stylesheet" type="text/css" href="./public/resource/js/login.js">
+    </body>
+</html>

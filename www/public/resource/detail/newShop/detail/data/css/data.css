@@ -1,0 +1,158 @@
+﻿body{
+	font-size:14px;
+}
+.detail .search form ul li b{
+    position:absolute;
+    right:20px;
+    top:0;
+    font-size:20px;
+    padding:0 10px;
+    cursor:pointer;
+}
+.detail{
+    margin-top: 20px;
+    background-color: #fff;
+}
+.detail h3{
+    font-weight:bold;
+    height: 40px;
+    line-height: 40px;
+    border-bottom:1px solid #eee;
+}
+.detail h3 b{
+    float:right;
+    font-size:30px;
+    cursor:pointer;
+    padding:0 10px;
+}
+.detail p{
+    height: 60px;
+    line-height: 60px;
+    color:#337dc4;
+}
+.detail table{
+    width: 100%;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+}
+.detail table th{
+    background-color: #f5f5f5;
+}
+.detail table th,.detail table td{
+    padding:10px 4px;
+    text-align: center;
+    overflow: hidden;
+    border-right:1px solid #eee;
+    border-bottom:1px solid #eee;
+}
+.detail table td input{
+    height:28px;
+    text-indent: 10px;
+    border-radius: 2px;
+    border:1px solid #ccc;
+}
+.detail table td a{
+    color:#337dc4;
+}
+.detail .thing{
+    position:relative;
+    border:1px solid #eee;
+    padding:20px;
+    margin-top: 20px;
+}
+.detail .thing ul li{
+    overflow:hidden;
+    border-bottom:1px solid #eee;
+}
+.detail .thing ul li div{
+    width: 100px;
+    height: 80px;
+    float:left;
+    margin-bottom: 40px;
+    margin-bottom: 1px;
+}
+.detail .thing ul li div span{
+    display: block;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.detail .thing ul li div span:nth-child(2n){
+    font-weight:bold;
+}
+.detail .thing .photo{
+    position:absolute;
+    right:20px;
+    bottom:20px;
+}
+.detail .thing .photo .learn{
+    position:relative;
+    background-color: #fff;
+}
+.detail .thing .photo .learn span,.detail .thing .photo .learn em,.detail .thing .photo .learn b{
+    position:absolute;
+}
+.detail .thing .photo .learn span{
+    top:90px;
+    right:110px;
+}
+.detail .thing .photo .learn em{
+    right:130px;
+    bottom:44px;
+}
+.detail .thing .photo .learn b{
+    right:14px;
+    bottom:88px;
+}
+.detail .search{
+    overflow:hidden;
+    margin-top: 20px;
+    background-color: #f8f8f8;
+}
+.detail .search form{
+    float:left;
+    margin-left: 20px;
+    position:relative;
+    right:0;
+}
+.detail .search form ul{
+    overflow:hidden;
+    padding:10px 0;
+}
+.detail .search form ul li{
+    float:left;
+    height: 30px;
+    line-height: 30px;
+    overflow:hidden;
+    color:#666;
+    position:relative;
+}
+.detail .search form ul li span{
+    width: 50px;
+    height: 30px;
+    float:left;
+    background-color: #eee;
+    color:#333;
+    text-align: center;
+}
+.detail .search form ul li input{
+    float:left;
+    height: 30px;
+    text-indent:10px;
+    border:1px solid #eee;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+.detail .search form ul li em{
+    margin:0 4px;
+}
+.detail .search form ul .next input{
+    width: 50px;
+    text-indent:0;
+    text-align: center;
+    background-color: #337dc4;
+    color:#fff;
+    border-radius:2px;
+    cursor:pointer;
+}

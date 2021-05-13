@@ -1,0 +1,140 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<style type="text/css">
+    #LoginBox {
+    position: fixed;
+    top: 40%;
+    background: white;
+    width: 100%;
+    border: 3px solid #444;
+    border-radius: 7px;
+    z-index: 10000;
+    display: none;
+    font-size: 1rem;
+}
+#LoginBox .row1 {
+    background: #f7f7f7;
+    padding: 0px 2px;
+    line-height: 3rem;
+    height: 3rem;
+    font-weight: bold;
+    color: #666;
+    font-size: 1rem;
+}
+#LoginBox .row1 .close_btn {
+    font-family: arial;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #999;
+    text-decoration: none;
+    float: right;
+    padding-right: 4px;
+}
+#LoginBox .row {
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0px 2px;
+    font-family: 华文楷体;
+}
+
+#LoginBox .row .inputBox {
+    border: 1px solid #c3c3c3;
+    padding: 1px 3px 6px 3px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+#LoginBox .row .inputBox #txtName {
+    height: 1rem;
+    width: 50%;
+    border: none;
+}
+
+#LoginBox .row  #loginbtn {
+    color: White;
+    background: #4490f7;
+    text-decoration: none;
+    padding: 2px 2px;
+    margin-left: 2px;
+    margin-top: 2px;
+    border-radius: 5px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+</style>
+<div class="content" style="background-color: #fff;">
+    <div class="con" >
+        <div class="right">
+             <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                             <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">设备端口</a></span>
+                            </div>
+                            <div class="aps-tab-label  aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="{:U('/Admin/Device/showLogs',array('id'=>$this_device))}">设备记录</a></span>
+                            </div>
+                            <div class="aps-tab-label aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="{:U('/Admin/Device/showCase',array('id'=>$this_device))}">设备事件</a></span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        <include file = "./tmp_mobile/Admin/Device/top.html" />
+           <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td class="wavBox ">
+                                <div id="LoginBox" class="wavbox_{$val.id}">
+                                    <input type="hidden"  class="_device_id" value="{$val['device_id']}">
+                                    <input type="hidden"  class="_line_id" value="{$val['code']}">
+                                    <div class="row1">
+                                        修改端口名称<a href="javascript:;" title="关闭窗口" class="close_btn" id="closeBtn" onclick="closeDiv({$val['id']})" style="color: rgb(153, 153, 153);">×</a>
+                                    </div>
+                                    <div class="row">
+                                        端口名: <span class="inputBox">
+                                            <input type="text" id="txtName" placeholder="备注名称" class="_port_name" value="{$val['portname']}">
+                                    </div>
+                                    <div class="row">
+                                        <a href="javascript:;" onclick="SavePortName(this);" id="loginbtn" style="opacity: 0.8;">提交</a>
+                                    </div>
+                                </div>
+                                <div style="width:100%;">
+                                    端口 {$val['code']}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    名称 {$val['portname']}&nbsp;&nbsp;&nbsp;&nbsp;
+                                    状态 <if condition="$val['status'] eq 1">
+                                        <img src="./public/resource/images/online.png" style="width:1rem;display:inline-block;" title='在线'>
+                                    <else />
+                                        <img src="./public/resource/images/off.png" style="width:1rem;display:inline-block;" title="离线">
+                                    </if>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    电话 {$val['tel']}
+                                </div>
+                                <div style="width:100%;">
+                                    <span>来电：<span class="_comeing_{$val['id']}" >{$val['comeing']}</span>  
+                                    <span style="margin-left:5px;">
+                                    去电：<span class="_outgoing_<?=$val['device_id'] ?>" >{$val['outgoing']}</span></span>
+                                    <span style="margin-left:5px;">
+                                    未接：<span class="_missed_<?=$val['device_id'] ?>" >{$val['missed']}</span> </span>
+                                    <span style="margin-left:5px;">最后在线：<span class="_case_{$val['id']}" >{$val['last_date']}</span></span>
+                                </div>
+                                <div style="width:100%;">
+                                    <a href="javascript:;" onclick="updateName({$val['id']})">修改备注</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </foreach>
+                    </table>
+                    
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+    function updateName($id){
+        $(".wavbox_"+$id).css('display','block');
+    }
+    function closeDiv($id){
+        $(".wavbox_"+$id).css('display','none');
+    }
+</script>

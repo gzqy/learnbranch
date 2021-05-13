@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$SEO['title']}</title>
+    <link type="text/css" rel="stylesheet" href="./publicOld/resource/css/framework.css">
+    <link type="text/css" rel="stylesheet" href="./publicOld/resource/css/main.css?v=20170803">
+    <link type="text/css" rel="stylesheet" href="./publicOld/public/jqueryUI/ui-1.11.2/jquery-ui.min.css">
+    <script type="text/javascript" src="./publicOld/public/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./publicOld/public/jqueryUI/ui-1.11.2/jquery-ui.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="./publicOld/public/jqueryUI/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.css">
+    <script type="text/javascript" src="./publicOld/public/jqueryUI/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js"></script>
+    <script type="text/javascript" src="./publicOld/public/jqueryUI/jquery-ui-timepicker/i18n/jquery-ui-timepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="./publicOld/public/jqueryUI/datepicker-zh-CN.js"></script>
+    <script type="text/javascript" src="./publicOld/public/js/base.js?v=20161226"></script>
+    <link type="text/css" rel="stylesheet" href="./publicOld/public/dialog/dialog.css">
+    <script type="text/javascript" src="./publicOld/public/dialog/dialog.js?v=20160414"></script>
+    <script type="text/javascript" src="./publicOld/resource/javascript/framework.js"></script>
+    <link type="text/css" rel="stylesheet" href="./publicOld/public/css/public.css">
+    <script type="text/javascript" src="./publicOld/public/js/handle.js"></script>
+    <!--[if lt IE 9]>
+    <script src="./publicOld/public/js/html5.js"></script>
+    <script src="./publicOld/public/js/css3-mediaqueries.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<div class="page">
+    <!--&lt;!&ndash;            &ndash;&gt;<?php //include __DIR__.'/../Public/Top.php';?>-->
+
+    <!--the main content begin-->
+    <div class="container">
+        <!--the content-->
+        <div class="ui grid">
+            <div class="four wide column">
+            </div>
+
+            <!--the Devicelist-->
+            <div class="twelve wide column">
+
+                <form id="_form" name="_form" action="{:U('Admins/saveDeviceAuth')}" method="post" onsubmit="return false;" >
+
+                <div class="ui vertical segment " id="adv_search" >
+                    <table class="ui    table">
+                        <thead>
+                        <tr>
+                            <th align="center" width="50" style="text-align: center;"><input class="ui checkbox " id="_all_change" type="checkbox"  value='1'></th>
+                            <th>设备序号</th>
+                            <th align="center" style="text-align: center">设备名称</th>
+                            <th align="center" width="100"  style="text-align: center">线路总数</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php $i=0; while(list($key,$val)=@each($groups)) {
+
+                            $devices = D('Common/Devices')->getGroups($key);
+                                      ?>
+                        <tr style="background-color: #E6F4F9;border-bottom: 1px solid rgba(0, 0, 0, 0.03);">
+                            <td align="center"><input class="ui checkbox _group_change" type="checkbox" name="group_ids[]" value='<?=$key?>' <?php if( $purviews[$key] ) {  echo 'checked';} ?>></td>
+                            <td align="left" colspan="3"><?=$val?></td>
+                        </tr>
+                        <?php while(list($k,$v)=@each($devices)) {
+                                          $lines = D('Common/DeviceLine')->getLines($v['id']);
+
+                                          $purview_device_line = D('Common/AccountPurviewLine')->getData($data['id'],$v['id']);
+
+                                      ?>
+
+                        <tr style="<?php if ( $i % 2 == 0) { echo 'background-color: #FDFDFD;'; } ?> border-bottom: 1px solid rgba(0, 0, 0, 0.03);">
+                            <td align="center"><input class="ui checkbox _device_change _group_<?=$key?> _device_id_<?=$v['id']?>" type="checkbox" name="device_ids[]" value='<?=$v['id']?>' <?php if( in_array($v['id'],$purviews[$key]) ) {  echo 'checked';} ?>></td>
+                            <td align="left" width="200"><?=$v['code']?></td>
+                            <td align="left"><?=$v['name']?></td>
+                            <td align="center" style="text-align: center"><?=$v['line']?><a href="javascript:void(0);" class="_device_pop" data-id="<?=$v['id']?>"><i class="triangle down icon"></i></a></td>
+
+                        </tr>
+                        <tr style="display:none;" id="_device_box_<?=$v['id']?>">
+                            <td align="center"></td>
+                            <td align="left" colspan="3">
+                                <?php
+                                 foreach($lines as $j => $m) { ?>
+                                <label style="margin-right:25px;"><input class="ui checkbox _line_change _device_line_<?=$v['id']?>" data-device-id="<?=$v['id']?>" type="checkbox" name="line_ids[<?=$v['id']?>][]"  value='<?=$m['id']?>' <?php if( $purview_device_line[$m['id']] || ( empty($purview_device_line) && in_array($v['id'],$purviews[$key]) ) ) {  echo 'checked';} ?>> <?=sprintf("%04d", $m['code'])?> <?php if($m['portname']) { echo '('.$m['portname'].')'; } ?> </label>
+                                <?php } ?>
+                            </td>
+                        </tr>
+                        <?php $i++; } } ?>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+                <input type="hidden"  name="data[id]" value="<?=$data['id']?>">
+                <input type="hidden"  name="handle_label" value="Device">
+                <button class="ui small blue button" type="button"  onclick="Add();">保存</button>
+                <button class="ui small basic button" type="reset">取消</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+
+<script type="text/javascript" src="./publicOld/resource/js/device.js"></script>
+</html>

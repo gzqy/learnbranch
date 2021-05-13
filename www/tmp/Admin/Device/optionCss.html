@@ -1,0 +1,94 @@
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul,li{
+        list-style: none;
+    }
+    #test{
+        margin:20px 10px;
+    }
+    .clearfix:before,
+    .clearfix:after{
+        content: '';
+        display: block;
+        overflow: hidden;
+        clear: both;
+        height: 1px;
+    }
+    .fruitTitle{
+        float: left;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 5px 0 20px;
+
+    }
+    .box1{
+        position: relative;
+        float: left;
+        height: 30px;
+    }
+    .fruit1_ul1{
+        display: inline-block;
+        min-width:160px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 0 0 8px;
+        border:1px solid #d7d8d9;
+        /*border-radius: 4px;*/
+        overflow: hidden;
+        margin-top: 7px;
+        margin-left: 8px;
+        text-overflow: ellipsis;
+        /*white-space: nowrap; !*文本不换行,这样超出一行的部分被截取,显示...*!*/
+        cursor: pointer;
+    }
+    .multiFruit1{
+        display: none;
+        position: absolute;
+        left:8px;
+        top:36px;
+        min-width: 148px;
+        padding: 0 5px;
+        background: #fff;
+        border:1px solid #bbb;
+        margin-top: -1px;
+        overflow-x: hidden;
+        z-index: 10;
+        max-height: 150px;
+    }
+    .multiFruit1 li{
+        white-space:nowrap;
+        height: 30px;
+        line-height: 30px;
+    }
+    .multiFruit1 input,
+    .multiFruit1 label{
+        cursor: pointer;
+        margin: 2px 4px 0 0;
+        vertical-align: middle;
+    }
+    .txt_p{
+        top: 185px;
+        display: none;
+        position: absolute;
+        left: 8px;
+        border: 1px solid #bbb;
+        text-align: right;
+        height: 40px;
+        line-height: 40px;
+        z-index: 10;
+        background: #fff;
+    }
+    .select_ok1{
+        padding: 7px 9px;
+        font-size: 14px;
+        border-radius: 5px;
+        border:none;
+        margin:-2px 5px 0 0;
+        background: #337ab7;
+        color: #fff;
+        cursor: pointer;
+    }
+</style>

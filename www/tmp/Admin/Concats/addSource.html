@@ -1,0 +1,189 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<style type="text/css">
+#_form{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: #fff;
+    outline: 0;
+        display: block;
+        width: 993px;
+
+    padding: 0;
+ }
+.icp-content-block {
+    padding: 12px 26px;
+    margin: 0 auto;
+    width: 939px;
+    /*height:450px;*/
+}
+.icp-tipmessage-yellow {
+    border: solid 1px #fbc490;
+    background: #fffcf4;
+    color: #f96900;
+}
+.icp-tipmessage-yellow, .icp-tipmessage-yellow-multibottom, .icp-tipmessage-green {
+    display: block;
+    margin: 12px auto;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 20px;
+    text-align: center;
+}
+span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+.icp-form-type-block{
+    margin-top:0px;
+}
+.icp-form-type-block .icp-form-item {
+    padding: 12px 0;
+    clear: both;
+}
+.icp-form-type-block .icp-form-item-left-title {
+    float: left;
+    width: 210px;
+    text-align: right;
+    line-height: 32px;
+}
+.icp-form .i-must {
+    color: #f06;
+    margin-right: 5px;
+}
+.icp-form-type-block .icp-form-item-center-content {
+    float: left;
+    margin-left: 15px;
+    width: 363px;
+    line-height: 32px;
+}
+.icp-form-type-block .icp-form-item-center-content .icp-form-item-text {
+    line-height: 22px;
+    vertical-align: middle;
+}
+.icp-form-item-center-content .icp-form-item-text, .icp-form-type-block .icp-form-item-center-content .icp-form-item-textarea, .icp-form-type-block .icp-form-item-center-content .icp-form-item-select {
+    width: 341px;
+    margin: 0;
+    padding: 4px 10px;
+    font-size: 14px;
+    border: 1px solid #CCC;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    background: #FFF url(//gtms01.alicdn.com/tps/i1/T1GNE5FiBdXXbuPdMe-950-300.gif) 0 0 no-repeat;
+    box-shadow: 0 1px 2px #f4f4f4 inset;
+}
+.width-303 {
+    width: 303px !important;
+}
+body, button, input, select, textarea {
+    font-size: 12px;
+    font-family: "\5FAE\8F6F\96C5\9ED1", "Microsoft Yahei", tahoma, arial, "Hiragino Sans GB", "\5B8B\4F53";
+    color: #333;
+    resize: none;
+}
+.icp-form-type-block-bottom-operation {
+    display: block;
+    border: none;
+    width: 739px;
+    padding: 12px 0 12px 254px;
+}
+.icp-form-type-block-bottom-operation>button[class*='icp-button'], .icp-form-type-block-bottom-operation>a[class*='icp-button'] {
+    margin-right: 10px;
+}
+.icp-button-size-large {
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 24px;
+}
+.icp-button-main {
+    color: #fff;
+    border: 1px solid #00a1cc;
+    background-color: #00a1cc;
+}
+.icp-button-main, .icp-button-main-green, .icp-button-grey, .icp-button-minor, .icp-button-main-invert, .icp-button-minor-invert, .icp-button-main-netcn, .icp-button-minor-netcn {
+    display: inline-block;
+    vertical-align: middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: middle;
+}
+</style>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <dl class="nav">
+            <dt><b>●</b>通讯录管理</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Concats/SourceList')}">客户来源列表</a></span>
+                        </div>
+                        
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">
+                               <if condition="$title eq 1"> 添加客户来源<else /> 编辑客户来源 </if>
+                            </a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <form id="_form" name="_form" action="{:U('/Concats/saveSource')}" method="post" onsubmit="return false;">
+                <input type="hidden"  name="data[id]" value="{$data['id']}" />
+                <div class="icp-content-block">
+                    <div class="icp-tipmessage-yellow">
+                        <span>请填写信息进行添加/编辑</span>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>来源名称 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text"  class="icp-form-item-text J_must J_dwCard"  name="data[name]" value='{$data['name']}'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icp-content-block">
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title">保存编辑 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="submit" value="提交" class="icp-button-main icp-button-size-large J_btnSubmit" onclick="Add()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./public/resource/js/concat.js"></script>

@@ -1,0 +1,10 @@
+td .pic{
+	display:inline-block;
+	line-height:100%;
+	vertical-align: middle;
+}
+td .pic img{
+	vertical-align: middle;
+	width:20px;
+	height:20px;
+}

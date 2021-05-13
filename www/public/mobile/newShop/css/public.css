@@ -1,0 +1,273 @@
+﻿/* 上部固定栏 */
+.head{
+	position:fixed;
+	left:0;
+	top:0;
+	width: 100%;
+	overflow: hidden;
+}
+/* 左侧头像以及店铺信息 */
+.head .mes{
+	float:left;
+	width: 11%;
+	height: 54px;
+	overflow:hidden;
+	background-color: #327dc3;
+}
+.head .mes img{
+	width: 34px;
+	height: 34px;
+	border-radius:50%;
+	float:left;
+	margin:10px 10px 0 10px;
+}
+.head .mes p{
+	float:left;
+	width: 60%;
+	color:#fff;
+	font-size:14px;
+	line-height: 54px;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+/* 左侧头像以及店铺信息 */
+
+/* 右侧相关信息 */
+.head .about{
+	float:left;
+	width: 85%;
+	padding:0 2%;
+	height: 53px;
+	overflow:hidden;
+	border-bottom:1px solid #eee;
+}
+/* 返回主页 */
+.head .about a{
+	float:left;
+	width: 20px;
+	height: 20px;
+	padding:0;
+	margin:17px 10px 17px 0;
+	background-image: url(../image/index.png);
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+/* 返回主页 */
+/* 信息，设置以及名称 */
+.head .about .something{
+	overflow:hidden;
+	float:right;
+}
+.head .about .something .new{
+	width: 20px;
+	height: 15px;
+	background-image: url(../image/mes.png);
+	margin:20px 60px 0 0;
+}
+.head .about .something .setting{
+	width: 20px;
+	height: 18px;
+	background-image: url(../image/setting.png);
+	margin:18px 60px 0 0;
+	border:0 none;
+	padding:0;
+}
+.head .about .something p{
+	float:left;
+	cursor:pointer;
+	margin-top:16px;
+}
+.head .about .something p b{
+	color:#333;
+}
+/* 信息，设置以及名称 */
+/* 右侧相关信息 */
+
+/* 上部固定栏 */
+
+/* 左侧一级导航 */
+.oneNav{
+	position:fixed;
+	left:0;
+	top:54px;
+	z-index:1000;
+	width: 11%;
+	height: 100%;
+	/*padding-top:20px;*/
+	background-color: #444;
+}
+.oneNav li{
+	height: 45px;
+	line-height: 45px;
+}
+.oneNav li a{
+	padding:0 18%;
+	color:#fff;
+	overflow: hidden;
+	display: block;
+}
+.oneNav li span{
+	display:inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../image/caiwu.png);
+	background-size: cover;
+	margin:14px 10px 0 0;
+}
+.oneNav li b{
+	display:inline-block;
+	font-size:16px;
+	vertical-align: top;
+}
+.oneNav .line{
+	position:absolute;
+	left:0;
+	top:170px;
+	width: 100%;
+	height: 1px;
+	display:none;
+	background-color: #333;
+}
+.oneNav .line2{
+	top:520px;
+}
+.oneNav .bg{
+	background-color: #f8f8f8;
+}
+.oneNav .cur{
+	background-color: #f8f8f8;
+}
+.oneNav .bg b{
+	color:#333;
+}
+.oneNav .cur b{
+	color:#333;
+}
+/* 各种图标 */
+.oneNav .boss{
+	background-image: url(../image/laoban.png);
+}
+.oneNav .parter{
+	background-image: url(../image/hehuoren.png);
+}
+.oneNav .distribution{
+	background-image: url(../image/fenxiao.png);
+}
+.oneNav .order{
+	background-image: url(../image/dingdan.png);
+}
+.oneNav .good{
+	background-image: url(../image/shangpin.png);
+}
+.oneNav .store{
+	background-image: url(../image/shangcheng.png);
+}
+.oneNav .finance{
+	background-image: url(../image/caiwu.png);
+}
+.oneNav .data{
+	background-image: url(../image/shuju.png);
+}
+.oneNav .activity{
+	background-image: url(../image/huodong.png);
+}
+.oneNav .adminPost{
+	background-image: url(../image/neirong.png);
+}
+.oneNav .system{
+	background-image: url(../image/xitong.png);
+}
+.oneNav .bg .boss{
+	background-image: url(../image/laoban-1.png);
+}
+.oneNav .bg .parter{
+	background-image: url(../image/hehuoren-1.png);
+}
+.oneNav .bg .distribution{
+	background-image: url(../image/fenxiao-1.png);
+}
+.oneNav .bg .order{
+	background-image: url(../image/dingdan-1.png);
+}
+.oneNav .bg .good{
+	background-image: url(../image/shangpin-1.png);
+}
+.oneNav .bg .store{
+	background-image: url(../image/shangcheng-1.png);
+}
+.oneNav .bg .finance{
+	background-image: url(../image/caiwu-1.png);
+}
+.oneNav .bg .data{
+	background-image: url(../image/shuju-1.png);
+}
+.oneNav .bg .activity{
+	background-image: url(../image/huodong-1.png);
+}
+.oneNav .bg .adminPost{
+	background-image: url(../image/neirong-1.png);
+}
+.oneNav .bg .system{
+	background-image: url(../image/xitong-1.png);
+}
+.oneNav .cur .boss{
+	background-image: url(../image/laoban-1.png);
+}
+.oneNav .cur .parter{
+	background-image: url(../image/hehuoren-1.png);
+}
+.oneNav .cur .distribution{
+	background-image: url(../image/fenxiao-1.png);
+}
+.oneNav .cur .order{
+	background-image: url(../image/dingdan-1.png);
+}
+.oneNav .cur .good{
+	background-image: url(../image/shangpin-1.png);
+}
+.oneNav .cur .store{
+	background-image: url(../image/shangcheng-1.png);
+}
+.oneNav .cur .finance{
+	background-image: url(../image/caiwu-1.png);
+}
+.oneNav .cur .data{
+	background-image: url(../image/shuju-1.png);
+}
+.oneNav .cur .activity{
+	background-image: url(../image/huodong-1.png);
+}
+.oneNav .cur .adminPost{
+	background-image: url(../image/neirong-1.png);
+}
+.oneNav .cur .system{
+	background-image: url(../image/xitong-1.png);
+}
+/* 各种图标 */
+
+/* 左侧一级导航 */
+
+/* 店铺信息相关 */
+.setNav{
+	position:fixed;
+	z-index:11;
+	right:0;
+	top:54px;
+	display: none;
+}
+.setNav li{
+	width: 160px;
+}
+.setNav li a{
+	display: block;
+	height:30px;
+	line-height: 30px;
+	color:#666;
+	text-align: center;
+}
+.setNav li a:hover{
+	color:#327dc3;
+}
+/* 店铺信息相关 */

@@ -1,0 +1,89 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$second_nav_id eq $vo['id']">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+             <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Admins/index')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                   
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel()">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width:200px;">设备名称</th>
+                        <th>来电数量</th>
+                        <th>去电数量</th>
+                        <th>未接数量</th>
+                        <th>留言数量</th>
+                        <th>音频总数</th>
+                        <th>视频总数</th>
+                        <th>通话时长</th>
+                        <!--<th>录音时长</th>-->
+                    </tr> 
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="color:#06C;width:200px">{$val['name']}</td>
+                            <td>{$val.comeing}</td>
+                            <td>{$val.outgoing}</td>
+                            <td>{$val.missed}</td>
+                            <td>{$val.audio}</td>
+                            <td>{$val.message}</td>
+                            <td>{$val.vedio}</td>
+                            <td>{$val.call_time}</td>
+                            <!--<td>{$val.recording_time}</td>-->
+                        </tr>
+                        </foreach>
+                    </table>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+    //导出表格
+    function excel(){
+        var url = "{:U('DataApp/doStatistics_excel',array('start_date'=>$start_date,'end_date'=>$end_date,'ids'=>$ids,'excel'=>1))}";
+        location.href=url;
+        
+    }
+</script>

@@ -1,0 +1,80 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>版本管理</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th>版本</th>
+                        <th>地址</th>
+                        <th>是否启用</th>
+                        <th>更新内容</th>
+                        <th>操作</th>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                <table >
+                    <foreach name="list" key="key" item="val">
+                    <tr class="one">
+                        <td>{$val.version}</td>
+                        <td>{$val.url}</td>
+                        <td>{$val.status}</td>
+                        <td>{$val.content}</td>
+                        <td>
+                            <a href="{:U('/AppVersion/add',array('id'=>$val['id']))}">编辑</a>
+                            <!--<i>|</i>-->
+                            <!--<a href="javascript:;" onclick="versionDelete({$val['id']})">删除</a>-->
+                        </td>
+                    </foreach>
+                </table>
+            </div>
+
+            <div class="pages" style="font-size: 14px;">
+                <!--{$Page}-->
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script>
+    function versionDelete(id){
+        dialog.tip({
+            msg:'确定要删除吗?',
+            buttons:{
+                "Ok": { text:'确定',"class": 'btn-done', click: function() {
+                    ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        url: 'index.php?s=/AppVersion/delete',
+                        data: "id="+id,
+                        success: function(rs){
+                            dialog.tip({
+                                msg:rs.msg,
+                                buttons:{
+                                    "Done": { text:'确定',"class": 'btn-done', click: function() { window.location.reload();   } }
+                                }
+                            });
+                        }
+                    });
+                }},
+                "Cancel": { text:'取消',"class": '', click: function() {  dialog.hide(); } }
+            }
+
+        });
+    }
+</script>

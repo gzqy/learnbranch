@@ -1,0 +1,295 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<link rel="stylesheet" type="text/css" href="__ROOT__/public/mobile/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__ROOT__/public/mobile/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/chartist/css/chartist-custom.css">
+        <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/linearicons/style.css">
+    <style type="text/css">
+        .ct-label{font-size:0.2rem;}
+    </style>
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <div class="right" >
+        	<div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                    	<foreach name="third_nav" item="vo">
+                    		<if condition="$third_nav_id eq $vo['id']">
+                    			<div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">{$vo.name}</a></span>
+	                            </div>
+                    		<else/>
+                    			<div class="aps-tab-label  aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="{$vo.a}">{$vo.name}</a></span>
+	                            </div>
+                    		</if>
+                    	</foreach>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wrapper">
+            	<div class="main" style="width:100%;">
+            		<div class="main-content">
+            			<div class="container-fluid">
+            				
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">所有记录统计</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                   
+
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart1" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">通话时长/录音时长统计</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width: 100%;">
+	                                        <div id="headline-chart3" class="ct-chart" style="height:300px;width:100%;"></div>
+	                                    </div>
+	                                    
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">端口平均记录统计</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                                
+	                         <div class="panel panel-headline">
+	                         	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">记录变化统计</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                               	<div class="row"></div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart2" class="ct-chart" style="width:100%;height:400px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+            			</div>
+            		</div>
+            	</div>
+            </div>	
+        </div>
+    </div>
+</div>
+<script src="__ROOT__/public/echarts/dist/echarts.js"></script>
+<script type="text/javascript">
+	 require.config({
+            paths: {
+                echarts: 'public/echarts/dist'
+            }
+        });
+	 	//权限设备数量处理
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/bar',
+                'echarts/chart/pie',
+            ],
+            function (ec) {
+               
+                var myChart1 = ec.init(document.getElementById('headline-chart1'),'dark');
+                var all = "{$logs['all']}";
+                var comeing = "{$logs['comeing']}";
+                var outgoing = "{$logs['outgoing']}";
+                var missed = "{$logs['missed']}";
+                var audio = "{$logs['audio']}";
+                var message = "{$logs['message']}";
+                var vedio = "{$logs['vedio']}";
+                var option =  {
+		            title: {
+		                text: '',
+		                align:'center'
+		            },
+		            tooltip: {
+		            	trigger: 'item',
+        				formatter: "{a} <br/>{b} : {c} ({d}%)",
+		            },
+		            legend: {
+		            	left: 'left',
+		            	// orient: 'vertical',
+		            	
+		                data: []
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar','pie']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            series: [{
+		                name: '记录条数',
+		                type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '60%'],
+			            data:[
+			                {value:comeing, name:'来电记录'},
+			                {value:outgoing, name:'去电记录'},
+			                {value:missed, name:'未接记录'},
+			                {value:audio, name:'音频记录'},
+			                {value:message, name:'留言记录'},
+			                {value:vedio, name:'视频记录'},
+			            ],
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+		            }]
+		        };
+                myChart1.setOption(option);
+
+                var myChart = ec.init(document.getElementById('headline-chart'),'dark');
+                var all = "{$callByTime.all}";
+                var comeing = "{$callByTime.comeing}";
+                var outgoing = "{$callByTime.outgoing}";
+                var missed = "{$callByTime.missed}";
+                var audio = "{$callByTime.audio}";
+                var message = "{$callByTime.message}";
+                var vedio = "{$callByTime.vedio}";
+                var recording_time = "{$callByTime.recording_time}";
+                var call_time = "{$callByTime.call_time}";
+            	var option = {
+		            title: {
+		                text: ''
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:["条数"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["月均记录","月均来电","月均去电","月均未接",'月均音频','月均留言','月均视频','月均通话/小时','月均录音/小时']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, comeing, outgoing,missed,audio,message,vedio,call_time,recording_time]
+		            }]
+		        };
+
+		        myChart.setOption(option);
+
+
+		        var myChart3 = ec.init(document.getElementById('headline-chart3'));
+		        var call_time = "{$res['call_time']}";
+		        var record_time = "{$res['record_time']}";
+		        var avge_call = "{$res['avge_call']}";
+		        var avge_record = "{$res['avge_record']}";
+		        var option = {
+		        	 title: {
+		                text: ''
+		            },
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				     
+				    legend: {
+				    	left: 'left',
+				        data:["总时长","平均时长"]
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['通话','录音']
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'总时长',
+				            type:'bar',
+				            data:[call_time, record_time]
+				        },
+				        {
+				            name:'平均时长',
+				            type:'bar',
+				            data:[avge_call, avge_call]
+				        },
+				       
+				        
+				    ]
+				};
+				myChart3.setOption(option);
+
+				var myChart2 = ec.init(document.getElementById('headline-chart2'));
+
+				var option = <?php echo $option ?>;
+				console.log(option);
+				myChart2.setOption(option);
+            }
+
+        );
+	
+</script>
+<script type="text/javascript">
+    function togle(obj){
+
+        var class1 = obj.children("i").attr('class');
+        
+            if(obj.children("i").is(".fa-chevron-up")){
+                obj.children("i").attr('class','fa fa-chevron-down');
+            }else{
+                obj.children("i").attr('class','fa fa-chevron-up');
+            }
+        
+        par = obj.parent().next().slideToggle();
+
+    }
+</script>

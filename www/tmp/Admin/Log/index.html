@@ -1,0 +1,56 @@
+<include file="./tmp/Admin/Public/common.html"/>
+<include file="./tmp/Admin/Public/list.html"/>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <dl class="nav">
+            <dt><b>●</b>程序日志</dt>
+        </dl>
+        <div class="right">
+
+            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title"
+                 style="padding: 8px;"> 是否开启程序日志:
+            </div>
+            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                不开启：<input onclick="update1()" type="radio"
+                           class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                <?php if(!$open){echo 'checked';}?>
+                name="open" value="0">
+                <br/>
+                开启: <input type="radio" onclick="update1()"
+                           class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small"
+                <?php if($open){echo 'checked';}?>
+                name="open" value="1">
+            </div>
+            <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                <a target="_blank" href="index.php?s=/Admin/Log/import">
+                    <button type="button"
+                            class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn">
+                        导出最近管理员操作程序日志
+                    </button>
+                </a>
+                <a target="_blank" href="index.php?s=/Admin/Log/import&model=Api">
+                    <button type="button"
+                            class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn">
+                        导出最近上传事件日志
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="./tmp/Admin/Public/list_js.html"/>
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script>
+    function update1() {
+        var open = $("[name='open']").filter(":checked").val()
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: 'index.php?s=/Admin/Log/update',
+            data: 'open=' + open,
+            success: function (rs) {
+                window.location.reload()
+            }
+        });
+    }
+</script>

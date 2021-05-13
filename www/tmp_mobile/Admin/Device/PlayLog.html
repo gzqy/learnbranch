@@ -1,0 +1,271 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<head>
+    <link rel="stylesheet" type="text/css" href="__ROOT__/public/mobile/css/style.css">
+    <link rel="stylesheet" type="text/css" href="__ROOT__/public/mobile/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/chartist/css/chartist-custom.css">
+        <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/linearicons/style.css">
+<link rel="stylesheet" href="./public/audio/AudioPlayer/css/audioplayer.css" />
+<style type="text/css">
+    *{margin: 0;padding: 0}
+            .myaudio{width:100%;height:60px;background-color: gold;position: fixed;bottom:0;}
+            .myaudio>.myaudio-center{max-width:500px;height:100%;width:100%;position: absolute;top:0 }
+            .myaudio>.myaudio-center>.aud-btn{height:50px;width:50px;position: absolute;top:5px;left:10px;z-index:999;}
+            .myaudio>.myaudio-center>.aud-btn>img{height:100%;width:100%;}
+            .myaudio>.myaudio-center>.aud-show{height:100%;position: absolute;left:65px;}
+            .myaudio>.myaudio-center>.aud-show>#Progress-time,.myaudio>.myaudio-center>.aud-show>#Progress-end{
+               width:40px; height:100%;font-size: 13px;line-height: 60px;text-align: center;
+            }
+            .myaudio>.myaudio-center>.aud-show>#Progress-time{position: absolute;left:0;}
+            .myaudio>.myaudio-center>.aud-show>#Progress{position: absolute;left:50px;top:28px;height:6px;background: #8cd287}
+            .myaudio>.myaudio-center>.aud-show>#Progress-end{position: absolute;right:0;}
+            .myaudio>.myaudio-center>.aud-show>#Progress>#jin{
+                width:6px;height:6px;background-color: blue;position: absolute;left:0px;;
+            }
+            .myaudio>.myaudio-center>.aud-show>#Progress>#yuan{
+                width:9px;height:9px;background-color: #fff;border: 1px solid #92d79b;border-radius: 6px;position: absolute;left:-3px;top:-2px;
+            }
+            
+</style>
+</head>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <div class="right">
+            <div id="wrapper">
+                 <div class="main" style="width:100%;">
+                <!-- MAIN CONTENT -->
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <!-- 登录账户基本信息 -->
+                        <div class="panel panel-headline">
+                            <div class="panel-body">
+                                <h4 style="width:auto;display: inline-block;">录音播放</h4>
+                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-registered"></i></span>
+                                            <p>
+                                                <span class="number">{$data['name']}</span>
+                                                <span class="title">设备信息</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-lastfm-square"></i></span>
+                                            <p>
+                                                <span class="number">{$data['portname']}</span>
+                                                <span class="title">端口信息</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-buysellads"></i></span>
+                                            <p>
+                                                <span class="number">{$data['type']}</span>
+                                                <span class="title">录音类型</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-registered"></i></span>
+                                            <p>
+                                                <?php $data['call_date']=is_numeric($data['call_date'])?date('Y-m-d H:i:s',$data['call_date']):$data['call_date'] ?>
+                                                <span class="number">{$data['call_date']}</span>
+                                                <span class="title">录音时间</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-lastfm-square"></i></span>
+                                            <p>
+                                                <span class="number">{$data['call_time']}</span>
+                                                <span class="title">通话时长</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="width:100%">
+                                        <div class="metric">
+                                            <span class="icon"><i class="fa fa-buysellads"></i></span>
+                                            <p>
+                                                <span class="number">{$data['recording_time']}</span>
+                                                <span class="title">录音时长</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="myaudio">
+                    <div class="myaudio-center">
+                        <audio id="aud">
+                            <source src='{$file}' type='audio/ogg' style="width:100%;">
+                            浏览器不支持此格式
+                        </audio>
+                        <div class="aud-btn">
+                            <img src="./public/mobile/images/play.png" id="play" />
+                        </div>
+                        <div class="aud-show">
+                            <div id="Progress-time">00:00</div> 
+                            <div id="Progress">
+                                <span id="jin"></span><span id="yuan"></span> 
+                            </div> 
+                            <div id="Progress-end">00:00</div> 
+                        </div>
+                    </div>
+                </div>
+            
+            
+        </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+            //底部显示区域总宽度
+            var footerW = $('.myaudio').width();
+            //中央显示区域的宽度
+            var audioW = $('.myaudio-center').width();
+            //alert(footerW);
+            //alert(audioW);
+            $('.myaudio-center').css({'left':(footerW-audioW)/2})
+            $('.aud-show').css({'width':audioW-70})
+            $('#Progress').css({'width':audioW-170})
+       
+            var i=0;
+            $('#play').click(function () {
+                i++;
+                if (i % 2 != 0) {
+                    $(this).attr('src', './public/mobile/images/pause.png');
+                    aud_play();
+                } else {
+                    $(this).attr('src', './public/mobile/images/play.png');
+                    aud_pause()
+                }
+            }) 
+            var music;
+            var audio = document.getElementById("aud");
+
+            function aud_play(q=0) {
+                audio.currentTime = q;
+                audio.play();
+                music = setInterval(function () {
+                    var curtime = audio.currentTime.toFixed(2);//播放进度
+                    var durtime = audio.duration.toFixed(2);//播放时间
+                    var str = "00:00";
+                   
+                    var time = formatSeconds(curtime);
+                  
+                    var time1 = str.substring(0, str.length - formatSeconds(durtime).length) + formatSeconds(durtime);
+               
+                    $('#Progress-time').html(time);
+                    $('#Progress-end').html(time1);
+                    $width = curtime / durtime * (audioW - 181);
+                    $('#jin').css({width: $width})
+                    $('#yuan').css({left: $width})
+                }, 100);
+            }
+            function aud_pause() {
+                document.getElementById("aud").pause();
+                clearInterval(music);
+            }
+         
+            function formatSeconds(value) {
+                var theTime = parseInt(value);// 秒
+                var theTime1 = 0;// 分
+                var theTime2 = 0;// 小时
+                if (theTime > 60) {
+                    theTime1 = parseInt(theTime / 60);
+                    theTime = parseInt(theTime % 60);
+                    if (theTime1 > 60) {
+                        theTime2 = parseInt(theTime1 / 60);
+                        theTime1 = parseInt(theTime1 % 60);
+                    }
+                }
+                var result = "" + theTime;
+                result  =   (result.length==1)?'0'+result:result;
+                if (theTime1 > 0) {
+                    theTime1  =   (theTime1.length==1)?'0'+theTime1:theTime1;
+                    
+                    result = "" + theTime1 + ":" + result;
+                }
+                if (theTime2 > 0) {
+                    theTime2  =   (theTime2.length==1)?'0'+theTime2:theTime2;
+                    result = "" + theTime2 + ":" + result;
+                }
+                result =   (result.length==2)?'00:'+result:result;
+                return result;
+            }
+            
+            var cont = $("#yuan");
+            var contW = $("#yuan").width();
+            var startX, sX, moveX, disX;
+            var winW = $('#Progress').width();
+            $("#yuan").on({ //绑定事件
+                touchstart: function (e) {
+                    
+                    startX = e.originalEvent.targetTouches[0].pageX;    //获取点击点的X坐标 
+                    sX = $(this).offset().left-110;//相对于当前窗口X轴的偏移量
+                    leftX = startX - sX;//鼠标所能移动的最左端是当前鼠标距div左边距的位置
+                    rightX = winW - contW + leftX;//鼠标所能移动的最右端是当前窗口距离减去鼠标距div最右端位置
+                },
+                touchmove: function (e) {
+                    //aud_pause();
+                    e.preventDefault();
+                    moveX = e.originalEvent.targetTouches[0].pageX;//移动过程中X轴的坐标
+                   
+                    if(moveX<leftX){moveX=leftX;}                               
+                    if(moveX>rightX){moveX=rightX;}
+                    $(this).css({
+                        "left":moveX+sX-startX,
+                    });
+                    $('#jin').width($(this).width()+moveX+sX-startX);
+                   var w = audio.duration.toFixed(2)*($('#jin').width()/winW)
+                    $('#play').attr('src', './public/mobile/images/pause.png');
+                    aud_play(w)
+                },
+                mousedown: function (ev) {
+                    aud_pause()
+                    var patch = parseInt($(this).css("height")) / 2;
+                    var left1 = parseInt($(this).parents('.myaudio-center').css("left"));
+                    
+                    
+                    $(this).mousemove(function (ev) {
+                        var oEvent = ev || event;
+                       // console.log(oEvent);
+                        var oX = oEvent.clientX;
+                        console.log(oX);
+                        var l = oX - patch-left1-115;//115为$("#yuan")的起始位置到$('.myaudio-center')左边的距离
+                        console.log(l);
+                        var w = $(window).width() - $(this).width();
+                        console.log(w);
+                        if (l < 0) {
+                            l = 0
+                        }
+                        if (l > w) {
+                            l = w
+                        }
+                        $(this).css({left: l})
+                        $('#jin').width($(this).width()+l);
+                        var w = audio.duration.toFixed(2)*($('#jin').width()/winW)
+                         $('#play').attr('src', './public/mobile/images/pause.png');
+                         aud_play(w)
+                    });
+                    $(this).mouseup(function () {
+                        $(this).unbind('mousemove');
+                    });
+                }
+            });
+
+        </script>

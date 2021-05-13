@@ -1,0 +1,10 @@
+.pagination span,.pagination a:link,.pagination a:visited {
+	padding: 3px 8px;
+	background-color: #F4F4F4;
+        border:1px solid #d0d0d0;
+	color:#333;
+}
+.pagination .current,.pagination a:hover {
+	 background-color: #667482;
+	 color:#EEE;
+}

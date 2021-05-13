@@ -1,0 +1,92 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$second_nav_id eq $vo['id']">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Data/doForms')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 类型说明:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <p>目前数据查看除了按小时方式，其他方式只能查看到前一天的数据，今日的数据尚未更新完毕</p>
+                                    <p>按天查看：以天为单位,查看选择时间段内的录音记录相关信息，不需要选择时分秒</p>
+                                    <p>按月查看：以月为单位,查看选择时间段内的录音记录相关信息，选择本月的任何一天都是一样的效果</p>
+                                    <p>按年查看：以年为单位,查看选择时间段内的录音记录相关信息，选择本年内的任何一个月一天都是一样的效果</p>
+                                    <p>按小时查看：以天为单位,查看选择时间段内的录音记录相关信息，只能查看一天内的时间段，不需要选择分秒单位</p>
+                                </div>    
+                            </div>
+
+                            <include file="./tmp/Admin/DeviceCall/top.html"/>
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="开始时间" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$edit_time_min}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 记录时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="结束时间" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$edit_time_max}" readonly></div>
+                                
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 统计方式:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="type" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                        <option value="0">按天查看</option>
+                                        <option value="1">按小时查看</option>
+                                        <option value="2">按月查看</option>
+                                        <option value="3">按年查看</option>
+                                    </select>
+                                </div>
+                                 
+                                 <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">查询</button>
+                                   
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>
+<script type="text/javascript">
+     $('#selectAll').click(function () {
+        var is = $("#selectAll").is(':checked');
+        if(true == is){
+            $("input[name='gids[]']").prop('checked', true);
+            $("input[name='ids[]']").prop('checked', true);
+        }else{
+             $("input[name='gids[]']").prop('checked', false);
+            $("input[name='ids[]']").prop('checked', false);
+        }
+        
+    });
+     $("input[name='gids[]']").click(function () {
+        var status = $(this).prop('checked');
+        $(this).parent().next('td').children('input[type=checkbox]').prop('checked', status);
+    });
+</script>

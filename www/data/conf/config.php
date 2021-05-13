@@ -1,0 +1,32 @@
+<?php
+return array(
+    'url'=>'config/url.php',
+    'database'=>'config/database.php',
+    'time_zone' => 'Asia/Shanghai',
+    'errorReporting'=>E_ALL & ~E_NOTICE & ~E_DEPRECATED,
+    'maxlifetime'=>10800,
+    'max_attention'=>20,
+    'max_log_attention'=>2000,
+    'page_inquire_show_log'=>100,
+    'page_inquire_excel_log'=>10000,
+    'debug'=>true,
+    'monitor'=>false,
+    'clean_day'=>false,
+    'web_name'=>'VAA',
+    'admins'=>array(),
+    'seo'=>array(
+        'is_partition'=>true,
+         'title'=>'云管理平台',
+        'logo'=>'./public/resource/images/logo-bak.png',
+        'logo_back'=>'./public/resource/images/logo_back.jpg',
+        'logo_foot'=>'./public/resource/images/logo_footer.png',
+        'copyright'=>'&copy; 2020 先锋音讯(北京)通讯技术有限公司, 版权所有!',
+        'miibeian'=>'京ICP备10214160号  京公网安备11010802011504号',
+    ),
+    'smtp_mail'=>array(
+        'server'=>'smtp.qq.com',
+        'port'=>465,
+        'from'=>array('mail'=>'3111263770@qq.com','name'=>'先锋音讯'),
+        'user'=>'3111263770@qq.com','pass'=>'oclywfxahdxcdcfg',
+    ),
+);

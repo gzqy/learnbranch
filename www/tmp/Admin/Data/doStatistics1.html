@@ -1,0 +1,110 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$second_nav_id eq $vo['id']">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+             <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Data/doStatistics_excel')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <input type="hidden" name="data" value='{$jdata}'>    
+                            <input type="hidden" name="type" value='2'>
+                            <input type="hidden" name="excel" value='1'>
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                   
+                                    <button type="submit" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width:200px;">设备名称</th>
+                        <th>端口名称</th>
+                        <th>来电数量</th>
+                        <th>去电数量</th>
+                        <th>未接数量</th>
+                        <th>留言数量</th>
+                        <th>音频总数</th>
+                        <th>视频总数</th>
+                        <!--<th>通话时长</th>-->
+                        <th>录音时长</th>
+                    </tr> 
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data['device']" key="key" item="val">
+                        <tr class="one" style="background: #ccc">
+                            <td style="color:#06C;width:200px">{$val['device_name']}</td>
+                            <td></td>
+                            <td>{$val['total']['coming']}</td>
+                            <td>{$val['total']['outing']}</td>
+                            <td>{$val['total']['miss']}</td>
+                            <td>{$val['total']['audio']}</td>
+                            <td>{$val['total']['message']}</td>
+                            <td>{$val['total']['vedio']}</td>
+                            <!--<td>{$val['total']['call_time']}</td>-->
+                            <td>{$val['total']['recording_time']}</td>
+                        </tr>
+                            <foreach name="val['line']" item="line">
+                            <tr>
+                                <td></td>
+                                <td>{$line.portname}</td>
+                                <td>{$line.coming}</td>
+                                <td>{$line.outing}</td>
+                                <td>{$line.miss}</td>
+                                <td>{$line.audio}</td>
+                                <td>{$line.message}</td>
+                                <td>{$line.vedio}</td>
+                                <!--<td>{$line.call_time}</td>-->
+                                <td>{$line.recording_time}</td>
+                            </tr>
+                            </foreach>
+                        </foreach>
+                        <tr style="background: #FFEC8B;color:red;">
+                            <td style="color:red;">总计</td>
+                            <td></td>
+                            <td style="color:red;">{$data['total']['coming']}</td>
+                            <td style="color:red;">{$data['total']['outing']}</td>
+                            <td style="color:red;">{$data['total']['miss']}</td>
+                            <td style="color:red;">{$data['total']['audio']}</td>
+                            <td style="color:red;">{$data['total']['message']}</td>
+                            <td style="color:red;">{$data['total']['vedio']}</td>
+                            <!--<td style="color:red;">{$data['total']['call_time']}</td>-->
+                            <td style="color:red;">{$data['total']['recording_time']}</td>
+                        </tr>
+                    </table>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>

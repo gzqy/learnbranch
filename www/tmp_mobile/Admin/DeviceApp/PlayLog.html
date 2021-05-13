@@ -1,0 +1,30 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<link rel="stylesheet" href="./public/audio/AudioPlayer/css/audioplayer.css" />
+<script>
+    /*
+        VIEWPORT BUG FIX
+        iOS viewport scaling bug fix, by @mathias, @cheeaun and @jdalton
+    */
+    (function(doc){var addEvent='addEventListener',type='gesturestart',qsa='querySelectorAll',scales=[1,1],meta=qsa in doc?doc[qsa]('meta[name=viewport]'):[];function fix(){meta.content='width=device-width,minimum-scale='+scales[0]+',maximum-scale='+scales[1];doc.removeEventListener(type,fix,true);}if((meta=meta[meta.length-1])&&addEvent in doc){fix();scales=[.25,1.6];doc[addEvent](type,fix,true);}}(document));
+</script>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <dl class="nav">
+            <dt><b>●</b>设备管理</dt>
+            <dd class="bg"><a href="{:U('Device/status')}"><b>●</b>设备状态</a></dd>
+        </dl>
+        <div class="right" style="width:88.5%;">
+            <div id="wrapper">
+                <audio preload="auto" controls>
+                    <source src="{$file}">
+                </audio>
+            
+        </div>
+        </div>
+    </div>
+</div>
+<script src="./public/audio/AudioPlayer/js/audioplayer.js"></script>
+<script>
+    $( function() { $( 'audio' ).audioPlayer(); } );
+</script>

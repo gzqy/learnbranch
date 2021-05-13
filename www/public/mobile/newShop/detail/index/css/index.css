@@ -1,0 +1,151 @@
+﻿body{
+	font-size:14px;
+}
+.index{
+    padding:0 30px;
+}
+.index .about{
+    border-bottom:1px solid #eee;
+    padding:30px 0;
+    overflow: hidden;
+}
+.index .about .headImg{
+    float:left;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    position:relative;
+    overflow:hidden;
+    margin:0 30px;
+}
+.index .about .headImg img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.index .about .headImg span{
+    position:absolute;
+    bottom:0;
+    width: 100%;
+    font-size:12px;
+    height: 20px;
+    line-height: 20px;
+    color:#fff;
+    text-align: center;
+    background-color: rgba(0,0,0,.3);
+}
+.index .about .right{
+    float:left;
+}
+.index .about .right .one{
+    padding:10px 0;
+}
+.index .about .right .one b{
+    display: inline-block;
+    vertical-align: top;
+    font-size:16px;
+    font-weight:bold;
+    margin-right: 10px;
+}
+.index .about .right .one img{
+    width: 20px;
+    height: 20px;
+    border-radius:50%;
+    display:inline-block;
+    vertical-align: top;
+    margin:1px 10px;
+}
+.index .about .right .two{
+    padding:10px 0;
+    color:#666;
+}
+.index .about .right .two a{
+    color:#337dc4;
+}
+.index .about .right .two span{
+    border-right: 1px solid #ccc;
+    margin:0 16px;
+}
+.index .some{
+    width: 1024px;
+}
+.index .some h3{
+    height: 50px;
+    line-height: 50px;
+    color:#ff6500;
+    font-size:16px;
+    font-weight:bold;
+}
+.index .some ul{
+    overflow:hidden;
+}
+.index .some ul li{
+    float:left;
+    padding:20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border:1px solid #eee;
+}
+.index .some ul li h4{
+    padding-bottom:20px;
+}
+.index .some ul li h4 img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display:inline-block;
+    vertical-align:top;
+}
+.index .some ul li h4 span{
+    color:#333;
+    font-weight:bold;
+}
+.index .some ul li ol{
+    width: 450px;
+}
+.index .some ul li ol li{
+    padding:0;
+    width: 150px;
+    height: 100px;
+    border:0px;
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: #fbfbfd;
+    text-align: center;
+}
+.index .some ul li ol .two{
+    width: 225px;
+}
+.index .some ul li ol li p{
+    height: 50px;
+    line-height: 50px;
+}
+.index .some ul li ol li a{
+    display:block;
+    height: 50px;
+    line-height: 50px;
+    color:#337dc4;
+}
+.index .some ul li .expand{
+    overflow:hidden;
+    width: 450px;
+}
+.index .some ul li .expand img{
+    float:left;
+    width: 100px;
+    height: 100px;
+}
+.index .some ul li .expand textarea{
+    float:left;
+    text-indent:10px;
+    width: 330px;
+    line-height: 18px;
+    height: 100px;
+    padding:10px;
+    margin-left: 20px;
+    border-radius:2px;
+    resize:none;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}

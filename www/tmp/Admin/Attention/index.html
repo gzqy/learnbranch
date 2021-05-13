@@ -1,0 +1,130 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>关注管理</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">关注设备</a></span>
+                        </div>
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Attention/logList')}">关注记录</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Attention/index')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备名称:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写账号名称" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="name" value="{$name}"></div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备编码:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="请填写登录账号" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="code" value="{$code}"></div>
+                                
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 设备分组:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="group_id" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+                                        <option value="0">所有分组</option>
+                                        <foreach name="groups" key="key" item="vo">
+                                            <if condition="$key eq $group_id">
+                                                <option selected value="{key}">{$vo}</option>
+                                            <else />
+                                                <option value="{$key}">{$vo}</option>
+                                            </if>
+                                        </foreach>    
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关注时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关注时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button " style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel('{:U('Attention/index_excel')}')">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+            <input type="hidden" name="gdata" id="gdata" value='{$gdata}' />
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width: 50px"><input type="checkbox" id="allSelect"  onclick="changeAllIsBuy()"></th>
+                        <th style="width:120px">设备名称</th>
+                        <th style="width: 50px;">设备状态</th>
+                        <th>设备编码</th>
+                        <th>设备线路</th>
+                        <th>设备分组</th>
+                        <th>来电统计</th>
+                        <th>去电统计</th>
+                        <th>未接统计</th>
+                        <th>关注时间</th>
+                        <th>最后在线</th>
+                        <th>关注管理</th>
+                    </tr> 
+                </table>
+            </div>
+
+            <form id="_form" name="_form" action="/device/setGroup" method="post" onsubmit="return false;">
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                <table >
+                    <foreach name="data" key="key" item="val">
+                    <tr class="one">
+                        <td style="width: 50px"><input type="checkbox" class="J_check _ids" name="ids[]" value="{$val['id']}"></td>
+                        <td style="color:#06C;width:120px;">{$val['name']}</td>
+                        <td style="width: 50px;">
+                            <if condition="$val['status'] eq 1">
+                                <img src="./public/resource/images/online.png" width=30% title='在线'>
+                            <else />
+                                <img src="./public/resource/images/off.png" width=30% title="离线">
+                            </if>
+                        </td>
+                        <td>{$val.code}</td>
+                        <td>{$val.line}</td>
+                        <td>{$val.gname}</td>
+                        <td>{$val.comeing}</td>
+                        <td>{$val.outgoing}</td>
+                        <td>{$val.missed}</td>
+                        <td>{$val.add_time}</td>
+                        <td>{$val.last_time|date="Y-m-d H:i:s",###}</td>
+                        <td>
+                            <a href="javascript:;" onclick="unAttention({$val['id']})">取消关注</a>
+                        </td>
+                    </tr>
+                    </foreach>
+                </table>
+            </div>
+            </form>
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/attention.js"></script>

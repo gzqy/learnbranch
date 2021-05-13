@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>css+javascript三级折叠菜单</title>
+    <style>
+        *, body, ul, li, h1, h2 {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            font: 12px "宋体";
+            padding-top: 20px;
+        }
+
+        #menu {
+            width: 200px;
+            margin: auto;
+        }
+
+        #menu h1 {
+            cursor: pointer;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px 0 3px 10px;
+            border: #c60 1px solid;
+            margin-top: 1px;
+            background-color: #f93;
+        }
+
+        #menu h2 {
+            cursor: pointer;
+            color: #777;
+            font-size: 12px;
+            padding: 5px 0 3px 10px;
+            border: #e7e7e7 1px solid;
+            order-top-color: #fff;
+            background-color: #f4f4f4;
+        }
+
+        #menu ul {
+            padding-left: 15px;
+            height: 100px;
+            border: #e7e7e7 1px solid;
+            border-top: none;
+            overflow: auto;
+        }
+
+        #menu ul li {
+            padding: 5px 0 3px 10px;
+        }
+
+        .no {
+            display: none;
+        }
+    </style>
+    <script language="javascript">
+        function showmenu(obj, noid) {
+            var block = document.getelementbyid(noid);
+            var n = noid.substr(noid.length - 1);
+            if (noid.length == 4) {
+                var ul = document.getelementbyid(noid.substring(0, 3)).getelementsbytagname("ul");
+                var h2 = document.getelementbyid(noid.substring(0, 3)).getelementsbytagname("h2");
+                for (var i = 0; i < h2.length; i++) {
+                    h2[i].innerhtml = h2[i].innerhtml.replace("+", "-");
+                    h2[i].style.color = "";
+                }
+                obj.style.color = "#ff0000";
+                for (var i = 0; i < ul.length; i++) {
+                    if (i != n) {
+                        ul[i].classname = "no";
+                    }
+                }
+            } else {
+                var span = document.getelementbyid("menu").getelementsbytagname("span");
+               var h1 = document.getelementbyid("menu").getelementsbytagname("h1");
+                for (var i = 0; i < h1.length; i++) {
+                    h1[i].innerhtml = h1[i].innerhtml.replace("+", "-");
+                    h1[i].style.color = "";
+                }
+                obj.style.color = "#0000ff";
+                for (var i = 0; i < span.length; i++) {
+                    if (i != n) {
+                        span[i].classname = "no";
+                    }
+                }
+            }
+            alert(block.classname);
+            if (block.classname == "no") {
+                alert(1)
+                block.classname = "";
+                obj.innerhtml = obj.innerhtml.replace("-", "+");
+            } else {
+                block.classname = "no";
+                obj.style.color = "";
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="menu">
+    <h1 onclick="javascript:showmenu(this,'no0')"> - 一级菜单a</h1>
+    <span id="no0" class="no">
+<h2 onclick="javascript:showmenu(this,'no00')"> - 一级菜单a_1</h2>
+<ul id="no00" class="no">
+<li>一级菜单a_0</li>
+<li>一级菜单a_1</li>
+<li>一级菜单a_2</li>
+<li>一级菜单a_3</li>
+<li>一级菜单a_4</li>
+<li>一级菜单a_5</li>
+</ul>
+<h2 onclick="javascript:showmenu(this,'no01')"> - 一级菜单a_2</h2>
+<ul id="no01" class="no">
+<li>一级菜单a_0</li>
+<li>一级菜单a_1</li>
+<li>一级菜单a_2</li>
+<li>一级菜单a_3</li>
+<li>一级菜单a_4</li>
+</ul>
+<h2 onclick="javascript:showmenu(this,'no02')"> - 一级菜单a_3</h2>
+<ul id="no02" class="no">
+<li>一级菜单a_0</li>
+<li>一级菜单a_1</li>
+<li>一级菜单a_2</li>
+<li>一级菜单a_3</li>
+<li>一级菜单a_4</li>
+<li>一级菜单a_5</li>
+<li>一级菜单a_6</li>
+</ul>
+<h2 onclick="javascript:showmenu(this,'no03')"> - 一级菜单a_4</h2>
+<ul id="no03" class="no">
+<li>一级菜单a_0</li>
+<li>一级菜单a_1</li>
+<li>一级菜单a_2</li>
+<li>一级菜单a_3</li>
+<li>一级菜单a_4</li>
+<li>一级菜单a_5</li>
+<li>一级菜单a_6</li>
+<li>一级菜单a_7</li>
+</ul>
+</span>
+    <h1 onclick="javascript:showmenu(this,'no1')"> - 二级菜单b</h1>
+    <span id="no1" class="no">
+<h2 onclick="javascript:showmenu(this,'no10')"> - 二级菜单b_1</h2>
+<ul id="no10" class="no">
+<li>二级菜单b_0</li>
+<li>二级菜单b_1</li>
+<li>二级菜单b_2</li>
+<li>二级菜单b_3</li>
+<li>二级菜单b_4</li>
+<li>二级菜单b_5</li>
+<li>二级菜单b_6</li>
+<li>二级菜单b_7</li>
+</ul>
+<h2 onclick="javascript:showmenu(this,'no11')"> - 二级菜单b_2</h2>
+<ul id="no11" class="no">
+<li>二级菜单b_0</li>
+<li>二级菜单b_1</li>
+<li>二级菜单b_2</li>
+<li>二级菜单b_3</li>
+<li>二级菜单b_4</li>
+<li>二级菜单b_5</li>
+<li>二级菜单b_6</li>
+<li>二级菜单b_7</li>
+</ul>
+</span>
+    <h1 onclick="javascript:showmenu(this,'no2')"> - 三级菜单c</h1>
+    <span id="no2" class="no">
+<h2 onclick="javascript:ShowMenu(this,'NO20')"> - 三级菜单C_</h2>
+<ul id="NO20" class="no">
+<li>三级菜单C_0</li>
+<li>三级菜单C_1</li>
+<li>三级菜单C_2</li>
+<li>三级菜单c_3</li>
+<li>三级菜单c_4</li>
+<li>三级菜单c_5</li>
+<li>三级菜单c_6</li>
+<li>三级菜单c_7</li>
+<li>三级菜单c_8</li>
+<li>三级菜单c_9</li>
+</ul>
+<h2 onClick="javascript:ShowMenu(this,'NO21')"> - 三级菜单C_2</h2>
+<ul id="NO21" class="no">
+<li>三级菜单C_0</li>
+<li>三级菜单C_1</li>
+<li>三级菜单C_2</li>
+<li>三级菜单C_3</li>
+<li>三级菜单C_4</li>
+</ul>
+</span>
+    <h1 onClick="javascript:ShowMenu(this,'NO3')"> - 四级菜单D</h1>
+    <span id="NO3" class="no">
+<h2 onClick="javascript:ShowMenu(this,'NO30')"> - 四级菜单D_1</h2>
+<ul id="NO30" class="no">
+<li>四级菜单D_0</li>
+<li>四级菜单D_1</li>
+<li>四级菜单D_2</li>
+<li>四级菜单D_3</li>
+</ul>
+<h2 onClick="javascript:ShowMenu(this,'NO31')"> - 四级菜单D_2</h2>
+<ul id="NO31" class="no">
+<li>四级菜单D_0</li>
+<li>四级菜单D_1</li>
+<li>四级菜单D_2</li>
+<li>四级菜单D_3</li>
+<li>四级菜单D_4</li>
+<li>四级菜单D_5</li>
+</ul>
+</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$second_nav_id eq $vo['id']">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" >
+             <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="clearfix search" id="_form1" method="post" action="{:U('/Data/doXuewei_excel')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <input type="hidden" name="data" value='{$gdata}'>    
+                            <input type="hidden" name="excel" value='1'>
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                   
+                                    <button type="submit" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn">导出列表</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="formation clearfix" style="margin-top: 10px;">
+                <table>
+                    <tr>
+                        <th style="width:200px;">分公司</th>
+                        <th>销售姓名</th>
+                        <th>来电数量</th>
+                        <th>去电时长(s)</th>
+                        <th>去电数量</th>
+                        <th>去电时长(s)</th>
+                        <th>有效电话个数</th>
+                        <th>有效电话时长(s)</th>
+                        <th>无效电话个数</th>
+                        <th>无效电话时长(s)</th>
+                        <th>首个有效电话时间</th>
+                        <th>操作</th>
+                    </tr> 
+                </table>
+            </div>
+
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;">
+                    <table >
+                        <foreach name="data" key="key" item="val">
+                        <tr class="one">
+                            <td style="color:#06C;width:200px">{$val['name']|default='没有名称'}</td>
+                            <td>{$val.portname|default='没有名称'}</td>
+                            <td>{$val.come_count}</td>
+                            <td>{$val.come_time}</td>
+                            <td>{$val.out_count}</td>
+                            <td>{$val.out_time}</td>
+                            <td>{$val.youxiao_count}</td>
+                            <td>{$val.youxiao_time}</td>
+                            <td>{$val.wuxiao_count}</td>
+                            <td>{$val.wuxiao_time}</td>
+                            <td>{$val.first|default='没有记录'|date="Y-m-d H:i:s",###}</td>
+                            <td><a href="{:U('Data/xuewei_detail',array('device_id'=>$val['device_id'],'line_id'=>$val['line_id'],'start_date'=>$start_date,'end_date'=>$end_date,'pingfen'=>$pingfen))}">详情</a></td>
+                        </tr>
+                        </foreach>
+                    </table>
+            </div>
+            
+           
+        </div>
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>

@@ -1,0 +1,470 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<style type="text/css">
+#_form{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: #fff;
+    outline: 0;
+        display: block;
+        width: 993px;
+
+    padding: 0;
+ }
+.icp-content-block {
+    padding: 12px 26px;
+    margin: 0 auto;
+    width: 939px;
+    /*height:450px;*/
+}
+.icp-tipmessage-yellow {
+    border: solid 1px #fbc490;
+    background: #fffcf4;
+    color: #f96900;
+}
+.icp-tipmessage-yellow, .icp-tipmessage-yellow-multibottom, .icp-tipmessage-green {
+    display: block;
+    margin: 12px auto;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 6px 20px;
+    text-align: center;
+}
+span{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+.icp-form-type-block{
+    margin-top:0px;
+}
+.icp-form-type-block .icp-form-item {
+    padding: 12px 0;
+    clear: both;
+}
+.icp-form-type-block .icp-form-item-left-title {
+    float: left;
+    width: 210px;
+    text-align: right;
+    line-height: 32px;
+}
+.icp-form .i-must {
+    color: #f06;
+    margin-right: 5px;
+}
+.icp-form-type-block .icp-form-item-center-content {
+    float: left;
+    margin-left: 15px;
+    width: 363px;
+    line-height: 32px;
+}
+.icp-form-type-block .icp-form-item-center-content .icp-form-item-text {
+    line-height: 22px;
+    vertical-align: middle;
+}
+.icp-form-item-center-content .icp-form-item-text, .icp-form-type-block .icp-form-item-center-content .icp-form-item-textarea, .icp-form-type-block .icp-form-item-center-content .icp-form-item-select {
+    width: 341px;
+    margin: 0;
+    padding: 4px 10px;
+    font-size: 14px;
+    border: 1px solid #CCC;
+    -moz-border-radius: 3px / 3px;
+    -webkit-border-radius: 3px 3px;
+    border-radius: 3px / 3px;
+    background: #FFF url(//gtms01.alicdn.com/tps/i1/T1GNE5FiBdXXbuPdMe-950-300.gif) 0 0 no-repeat;
+    box-shadow: 0 1px 2px #f4f4f4 inset;
+}
+.width-303 {
+    width: 303px !important;
+}
+body, button, input, select, textarea {
+    font-size: 12px;
+    font-family: "\5FAE\8F6F\96C5\9ED1", "Microsoft Yahei", tahoma, arial, "Hiragino Sans GB", "\5B8B\4F53";
+    color: #333;
+    resize: none;
+}
+.icp-form-type-block-bottom-operation {
+    display: block;
+    border: none;
+    width: 739px;
+    padding: 12px 0 12px 254px;
+}
+.icp-form-type-block-bottom-operation>button[class*='icp-button'], .icp-form-type-block-bottom-operation>a[class*='icp-button'] {
+    margin-right: 10px;
+}
+.icp-button-size-large {
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 24px;
+}
+.icp-button-main {
+    color: #fff;
+    border: 1px solid #00a1cc;
+    background-color: #00a1cc;
+}
+.icp-button-main, .icp-button-main-green, .icp-button-grey, .icp-button-minor, .icp-button-main-invert, .icp-button-minor-invert, .icp-button-main-netcn, .icp-button-minor-netcn {
+    display: inline-block;
+    vertical-align: middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: middle;
+}
+table,table tr th, table tr td { border:1px solid #0094ff; }
+ul { list-style-type: none;}
+li { display: inline-block;}
+li { margin: 2px 2px;}
+input.labelauty + label { font: 12px "Microsoft Yahei";}
+</style>
+<link rel="stylesheet" type="text/css" href="./public/resource/css/deliver.css">
+<link rel="stylesheet" href="./public/resource/checkbox/css/jquery-labelauty.css">
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+         <dl class="nav">
+            <dt><b>●</b>账号管理</dt>
+            <dd class="bg"><a href="javascript:;"><b>●</b>账号管理</a></dd>
+        </dl>
+        <div class="right">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Admins/index')}">账号列表</a></span>
+                        </div>
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">编辑账号</a></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <form id="_form" name="_form" action="{:U('/Admins/doEdit')}" method="post" onsubmit="return false;">
+                <input type="hidden" name="data[id]" value="{$data.id}">
+                <input type="hidden" id="ids" name="ids" value='' />
+                <input type="hidden" id="aids" name="aids" value='' />
+                <input type="hidden" id="auth" name="auth" value='' />
+                <div class="icp-content-block">
+                    <div class="icp-tipmessage-yellow">
+                        <span>请编辑信息进行账号编辑</span>
+                    </div>
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>账号名称 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="text"  class="icp-form-item-text J_must J_dwCard"  name="data[name]" value='{$data['name']}'>
+                            </div>
+                        </div>
+                    </div>
+                            
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>登录账号 :</div>
+                            <div class="icp-form-item-center-content">
+                               <input type="text"  class="icp-form-item-text J_must J_dwCard" name="data[account]" value='{$data['account']}'>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>登录密码 :</div>
+                            <div class="icp-form-item-center-content">
+                               <input type="password"  class="icp-form-item-text J_must J_dwCard" name="data[password]" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>重复密码 :</div>
+                            <div class="icp-form-item-center-content">
+                               <input type="password"  class="icp-form-item-text J_must J_dwCard" name="data[apassword]" >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>手机号码 :</div>
+                            <div class="icp-form-item-center-content">
+                               <input type="text"  class="icp-form-item-text J_must J_dwCard" name="data[tel]" value='{$data['tel']}'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>账号邮箱 :</div>
+                            <div class="icp-form-item-center-content">
+                               <input type="text"  class="icp-form-item-text J_must J_dwCard" name="data[email]" value='{$data['email']}'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>选择权限 :</div>
+                            <div class="icp-form-item-center-content">
+                               <button type="button" class="js-assign-cost2 icp-button-main icp-button-size-large J_btnSubmit" >选择权限</button>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>设备权限 :</div>
+                            <div class="icp-form-item-center-content">
+                                <button type="button" class="js-assign-cost icp-button-main icp-button-size-large J_btnSubmit" >选择设备权限</button>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title"><em class="i-must">*</em>手机设备设备权限 :</div>
+                            <div class="icp-form-item-center-content">
+                                <button type="button" class="js-assign-cost1 icp-button-main icp-button-size-large J_btnSubmit" >选择手机设备权限</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icp-content-block">
+                    <div class="icp-form icp-form-type-block">
+                        <div class="icp-form-item">
+                            <div class="icp-form-item-left-title">保存编辑 :</div>
+                            <div class="icp-form-item-center-content">
+                                <input type="submit" value="保存" class="icp-button-main icp-button-size-large J_btnSubmit" onclick="Add()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="area-modal-wrap" data-area="" style="display:none;">
+                <div class="modal-mask"></div>
+                <div class="area-modal" style="top: 10%;">
+                    <div class="area-modal-head">
+                        <button class="js-modal-close" style="float: right;">关闭</button>
+                        <span>选择设备</span>
+                        <button id="selectAll">全选</button>
+                        <button id="unSelectAll">取消全选</button>
+                    </div>
+                    <div class="area-modal-content">
+                       <table border="1" cellspacing="0" style="margin: 8px;">
+                           <foreach name="devices" item="vo">
+                                <tr border="1">
+                                    <td style="padding: 5px;width: 15%;" border="1">
+                                        <input type="checkbox" name="gids[]" value="{$vo.id}" data-name="{$vo.name}"> {$vo.name}&nbsp;
+                                    </td>
+                                    <td style="padding: 5px;" border="1">
+                                        <foreach name="vo['devices']" item="vo1">
+                                            <if condition="$vo1.is eq 1">
+                                                <input type="checkbox" checked name="ids[]" value="{$vo1.id}" data-name="{$vo1.id}"> {$vo1.name}&nbsp;
+                                            <else />
+                                                <input type="checkbox" name="ids[]" value="{$vo1.id}" data-name="{$vo1.id}"> {$vo1.name}&nbsp;
+                                            </if>
+                                        </foreach>
+                                    </td>
+                                </tr>
+                           </foreach>
+                       </table>
+                    </div>
+                    <div class="area-modal-foot">
+                        <button class="zent-btn zent-btn-primary btn-wide js-modal-save">确定</button>&nbsp;&nbsp;
+                        <button class="zent-btn btn-wide js-modal-close">取消</button>
+                    </div>
+                </div>
+        </div>
+
+        <div class="area-modal-wrap1" data-area="" style="display:none;">
+            <div class="modal-mask"></div>
+            <div class="area-modal" style="top: 10%">
+                <div class="area-modal-head">
+                    <button class="js-modal-close1" style="float: right;">关闭</button>
+                    <span>选择设备</span>
+                    <button id="selectAll1">全选</button>
+                    <button id="unSelectAll1">取消全选</button>
+                </div>
+                <div class="area-modal-content">
+                   <table border="1" cellspacing="0" style="margin: 8px;">
+                       <foreach name="app_devices" item="vo">
+                            <tr>
+                                <td style="padding: 5px;width: 15%;">
+                                    <input type="checkbox" name="agids[]" value="{$vo.id}" data-name="{$vo.name}"> {$vo.name}&nbsp;
+                                </td>
+                                <td style="padding: 5px;">
+                                    <foreach name="vo['devices']" item="vo1">
+                                        <if condition="$vo1.is eq 1">
+                                            <input type="checkbox" checked name="aids[]" value="{$vo1.id}" data-name="{$vo1.id}"> {$vo1.name}&nbsp;
+                                        <else />
+                                            <input type="checkbox" name="aids[]" value="{$vo1.id}" data-name="{$vo1.id}"> {$vo1.name}&nbsp;
+                                        </if>
+                                    </foreach>
+                                </td>
+                            </tr>
+                       </foreach>
+                   </table>
+                </div>
+                <div class="area-modal-foot">
+                    <button class="zent-btn zent-btn-primary btn-wide js-modal-save1">确定</button>&nbsp;&nbsp;
+                    <button class="zent-btn btn-wide js-modal-close1">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="area-modal-wrap2" style="display:none;">
+                <div class="modal-mask"></div>
+                <div class="area-modal" style="top: 10%;">
+                    <div class="area-modal-head">
+                        <button class="js-modal-close2" style="float: right;">关闭</button>
+                        <span>选择权限</span>
+                        
+                    </div>
+                    <div class="area-modal-content">
+                        <ul class="dowebok">
+                            <foreach name="auths" item="vo">
+                                <if condition="$vo.is eq 1">
+                                    <li><input type="checkbox" checked name="auth[]" value="{$vo.id}" data-labelauty="{$vo.name}"></li>
+                                <else />
+                                    <li><input type="checkbox" name="auth[]" value="{$vo.id}" data-labelauty="{$vo.name}"></li>
+                                </if>
+                            </foreach>
+                        </ul>
+                    </div>
+                    <div class="area-modal-foot">
+                        <button class="zent-btn zent-btn-primary btn-wide js-modal-save2">确定</button>&nbsp;&nbsp;
+                        <button class="zent-btn btn-wide js-modal-close2">取消</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- <script src="./public/resource/checkbox/js/jquery-1.8.3.min.js"></script> -->
+<script src="./public/resource/checkbox/js/jquery-labelauty.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(':input[name="auth[]"]').labelauty();
+    });
+
+    $(".js-assign-cost2").click(function(){
+        $(".area-modal-wrap2").show();
+    });
+
+    $(".js-modal-close2").click(function(){
+        $(".area-modal-wrap2").hide();
+    });
+
+    $('.js-modal-save2').click(function () {
+        var str = '';
+        $("input[name='auth[]']").each(function(k, v) {
+            if ($(v).prop('checked')) {
+                str += $(v).val()+',';
+            } 
+        });
+        $("#auth").val(str);
+        $(".area-modal-wrap2").hide();
+    });
+
+
+
+    // 指定可配送区域的按钮
+    $(".js-assign-cost").click(function(){
+        $(".area-modal-wrap").show();
+    });
+
+    // 取消指定可配送区域的按钮
+    $(".js-modal-close").click(function(){
+        $(".area-modal-wrap").hide();
+    });
+
+    // 全选
+    $('#selectAll').click(function () {
+        $("input[name='ids[]']").prop('checked', true);
+    });
+
+    // 取消全选
+    $('#unSelectAll').click(function () {
+        $("input[name='gids[]']").prop('checked', false);
+        $("input[name='ids[]']").prop('checked', false);
+    });
+
+    $("input[name='gids[]']").click(function () {
+        var status = $(this).prop('checked');
+        $(this).parent().next('td').children('input[type=checkbox]').prop('checked', status);
+    });
+
+    
+    $('.js-modal-save').click(function () {
+        var str = '';
+        $("input[name='ids[]']").each(function(k, v) {
+            if ($(v).prop('checked')) {
+                str += $(v).attr('data-name')+',';
+            } 
+        });
+        $("#ids").val(str);
+        $(".area-modal-wrap").hide();
+    });
+
+
+
+
+
+    $(".js-assign-cost1").click(function(){
+        $(".area-modal-wrap1").show();
+    });
+
+    // 取消指定可配送区域的按钮
+    $(".js-modal-close1").click(function(){
+        $(".area-modal-wrap1").hide();
+    });
+
+    // 全选
+    $('#selectAll').click(function () {
+        $("input[name='ids[]']").prop('checked', true);
+    });
+
+    // 取消全选
+    $('#unSelectAll1').click(function () {
+        $("input[name='agids[]']").prop('checked', false);
+        $("input[name='aids[]']").prop('checked', false);
+    });
+
+    $("input[name='agids[]']").click(function () {
+        var status = $(this).prop('checked');
+        $(this).parent().next('td').children('input[type=checkbox]').prop('checked', status);
+    });
+
+    
+    $('.js-modal-save1').click(function () {
+        var str = '';
+        $("input[name='aids[]']").each(function(k, v) {
+            if ($(v).prop('checked')) {
+                str += $(v).attr('data-name')+',';
+            } 
+        });
+        $("#aids").val(str);
+        $(".area-modal-wrap1").hide();
+    });
+
+    function Add(){
+
+    _form('#_form',function(rs){
+        alert(rs.msg)
+    });
+}
+</script>

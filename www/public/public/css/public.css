@@ -1,0 +1,13 @@
+.hide { display: none; }
+.clear { clear: both }
+.red { color: Red; }
+.gray { color: #ddd }
+.gold { color: Orange }
+.cursor_pointer { cursor: pointer }
+.text_left { text-align: left;!important }
+.float_none{ float: none;!important }
+.cke_contents { clear: both; }
+.left_drive {  width:140px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;float:left; }
+.ui content.lefts { margin-left: 7px; }
+.ui.accordion .content.lefts { padding: 8px 5px; }
+ .ui.list .lefts .item  > .icon { float: left;margin-right:8px; cursor: pointer;margin-top: 1px;!important  }

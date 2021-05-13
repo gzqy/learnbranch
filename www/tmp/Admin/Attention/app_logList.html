@@ -1,0 +1,120 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+       <dl class="nav">
+            <dt><b>●</b>关注管理</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right" style="width:88.5%;">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Attention/app_index')}">关注设备</a></span>
+                        </div>
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">关注记录</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <form class="clearfix search" id="_form1" name="_form" method="post" aaction="{:U('/Attention/app_logList')}">
+                    <div class="filter">
+                        <div class="aps-widget aps-ani-transition aps-grid aps-grid-fluid aps-state-visible">
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                 <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 通话时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最小值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_call_time" value="{$start_call_time}"></div>
+
+                                 <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 通话时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" placeholder="最大值 单位：s" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_call_time" value="{$end_call_time}"></div>
+
+                                
+                            </div>
+                            
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                              <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 通话类型:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;">
+                                    <select name="search_type"  class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" style="padding: 4px;">
+                                        <option class="option" value='0'>全部类型</option>
+                                        <foreach name="types" item="val" key="key">
+                                            <if condition="$search_type eq $val['id']">
+                                                <option class="option" value="{$val.id}" selected="selected">{$val.name}</option>
+                                            <else />
+                                                <option class="option" value="{$val.id}">{$val.name}</option>
+                                            </if>
+                                        </foreach>
+                                    </select>
+                                </div>
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关注时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-one" placeholder="最小值" class="datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="start_date" value="{$start_date}" readonly></div>    
+
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-2 aps-state-visible legend title" style="padding: 8px;"> 关注时间:</div>
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-4 aps-state-visible" style="padding: 8px;"><input type="text" id="start-two" placeholder="最大值" class=" datainp aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small" name="end_date" value="{$end_date}" readonly></div>
+                                
+                            </div>
+
+                            <div class="aps-ani-transition aps-grid-row aps-state-visible">
+                                <div class="aps-ani-transition aps-grid-col aps-grid-col-md-24 aps-state-visible search-button" style="padding: 8px;">
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-primary aps-size-small btn" onclick="$('#_form1').submit();">搜索</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn" onclick="$('input').val('')">重置</button>
+                                    <button type="button" class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn" onclick="excel('{:U('Attention/app_logList_excel')}')">导出列表</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+           <input type="hidden" name="gdata" id="gdata" value='{$gdata}' />
+            <div  class="formation clearfix" style="margin-top: 10px;width:100%;overflow:hidden;">
+                <table>
+                    <tr>
+                        <th style="width: 20px"><input type="checkbox" name="to_all" id="_to_all" onclick="$('._ids').prop('checked',$(this).prop('checked'))" ></th>
+                            <th style="width: 100px">录音类型</th>
+                            <th style="width: 120px">关注时间</a></th>
+                            <th style="width: 80px;" title="录音时长">录音时长</th>
+                            <th style="width: 80px;" title="通话时长">通话时长</th>
+                            <th style="width:100px;">号码</th>
+                            <th style="width: 200px">操作</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;width:100%;overflow:hidden;">
+                <table>
+                <foreach name="data" key="key" item="val">
+                    <tr>
+                        <td style="width:20px;"><input type="checkbox" class="_ids" name="ids[]" value="{$val['id']}" ></td>
+                        <td style="width: 100px;"> {$val['type']}</td>
+                        <td style="width: 120px;">{$val['add_time']|date="Y-m-d H:i:s",###}</td>
+                        <td style="width: 80px;">{$val['recording_time']}</td>
+                        <td style="width: 80px;">{$val['call_time']}</td>
+                        <td style="width: 100px;">{$val['tel']}</td>
+                        <td style="width: 200px;">
+                            <a  href="{:U('DeviceApp/PlayLog',array('id'=>$val['call_id']))}" target="_blank" title="播放录音文件" >播放</a><i>|</i>
+                            <a href="{:U('DeviceApp/DownloadLog',array('id'=>$val['call_id']))}" target="_blank"  title="下载录音文件">下载</a><i>|</i>
+                            <a href="javascript:void(0)" onclick="unattentionlog1({$val['id']})"  title="删除记录">取消关注</a>
+                        </td>
+                    </tr>
+                </foreach>
+                </table>
+            </div>
+
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+
+        </div>
+       
+    </div>
+</div>
+<include file = "./tmp/Admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/attention.js"></script>

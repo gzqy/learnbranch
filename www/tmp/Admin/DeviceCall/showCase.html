@@ -1,0 +1,66 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+        <dl class="nav">
+            <dt><b>●</b>设备管理</dt>
+            <dd class="bg"><a href="{:U('/Device/status')}"><b>●</b>设备状态</a></dd>
+        </dl>
+        <div class="right" style="width:88.5%;">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                             <div class="aps-tab-label  aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="{:U('/Admin/Device/showLine',array('id'=>$this_device))}">设备端口</a></span>
+                            </div>
+                            <div class="aps-tab-label  aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="{:U('/Admin/Device/showLogs',array('id'=>$this_device))}">设备记录</a></span>
+                            </div>
+                            <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">设备事件</a></span>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <include file = "./tmp/Admin/Device/top.html" />
+           
+            <div  class="formation clearfix" style="margin-top: 10px;width:100%;overflow:hidden;">
+                <table>
+                    <tr>
+                        <th style="width: 50px">No.</th>
+                        <th style="width: 60px">端口</th>
+                        <th style="width: 100px">事件类型</th>
+                        <th style="width:200px" >事件内容</th>
+                        <th style="width: 140px">日期时间</th>
+                        <th style="width: 100px">操作</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="formation clearfix" style="border: 1px solid #e7e7e7;border-top: none;width:100%;overflow:hidden;">
+                <table>
+                <foreach name="data" key="key" item="val">
+                    <tr>
+                        <td style="width: 50px">{$val.id}</td>
+                        <td style="width: 60px">{$val.line_id}></td>
+                        <td style="width: 100px">{$val.type_name}</td>
+                        <td style="width: 200px">{$val.content}</td>
+                        <td style="width: 140px">{$val['add_time']|date="Y-m-d H:i:s",###}</td>
+                        <td style="width: 100px">
+                            <a href="javascript:void(0)" onclick="handleRemove('DeviceCase',<?=$val['id']?>)">删除</a>
+                           
+                        </td>
+                    </tr>
+                </foreach>
+                </table>
+            </div>
+
+            <div class="pages" style="font-size: 14px;">
+                {$Page}
+            </div>
+
+        </div>
+       
+    </div>
+</div>
+<include file = "./tmp/admin/Public/list_js.html" />
+<script type="text/javascript" src="./public/resource/js/device.js"></script>

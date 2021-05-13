@@ -1,0 +1,775 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/css/main.css">
+</head>
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+    	<dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+            	<if condition="$second_nav_id eq $vo['id']">
+            		<dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+            	<else />
+            		<dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+            	</if>
+            </foreach>
+            
+        </dl>
+
+        <div class="right" >
+        	<div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">数据统计结果</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wrapper">
+            	<div class="main" style="width:100%;">
+            		<div class="main-content">
+            			<div class="container-fluid">
+            				 <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                               	<div class="row"></div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart2" class="ct-chart" style="width:100%;height:400px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.all}</span>
+	                                                <span class="title">全部记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.comeing}</span>
+	                                                <span class="title">来电记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.outgoing}</span>
+	                                                <span class="title">去电记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.missed}</span>
+	                                                <span class="title">未接记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                 <div class="row">
+	                                    <div class="col-md-3" style="width:33%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.audio}</span>
+	                                                <span class="title">音频记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:33%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.message}</span>
+	                                                <span class="title">留言记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:33%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$logs.vedio}</span>
+	                                                <span class="title">视频记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart1" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['all']['call_time']}</span>
+	                                                <span class="title">总通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['call_time']}</span>
+	                                                <span class="title">平均{$type}通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['call_time']}</span>
+	                                                <span class="title">平均设备通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['call_time']}</span>
+	                                                <span class="title">平均设备{$type}通话</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                               <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['all']['recording_time']}</span>
+	                                                <span class="title">总录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['recording_time']}</span>
+	                                                <span class="title">平均{$type}录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['recording_time']}</span>
+	                                                <span class="title">平均设备录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['recording_time']}</span>
+	                                                <span class="title">平均设备{$type}录音</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width: 100%;">
+	                                        <div id="headline-chart3" class="ct-chart" style="height:300px;width:100%;"></div>
+	                                    </div>
+	                                    
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bytime']['all']}</span>
+	                                                <span class="title">{$type}记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bytime']['comeing']}</span>
+	                                                <span class="title">{$type}来电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bytime']['outgoing']}</span>
+	                                                <span class="title">{$type}去电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bytime']['missed']}</span>
+	                                                <span class="title">{$type}未接</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bytime']['audio']}</span>
+	                                                <span class="title">{$type}音频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['message']}</span>
+	                                                <span class="title">{$type}留言</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['vedio']}</span>
+	                                                <span class="title">{$type}视频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['call_time']}</span>
+	                                                <span class="title">{$type}通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bytime']['recording_time']}</span>
+	                                                <span class="title">{$type}录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevice']['all']}</span>
+	                                                <span class="title">每台设备记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevice']['comeing']}</span>
+	                                                <span class="title">每台设备记录来电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevice']['outgoing']}</span>
+	                                                <span class="title">每台设备记录去电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevice']['missed']}</span>
+	                                                <span class="title">每台设备记录未接</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevice']['audio']}</span>
+	                                                <span class="title">每台设备记录音频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['message']}</span>
+	                                                <span class="title">每台设备记录留言</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['vedio']}</span>
+	                                                <span class="title">每台设备记录视频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['call_time']}</span>
+	                                                <span class="title">每台设备记录通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevice']['recording_time']}</span>
+	                                                <span class="title">每台设备记录录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart4" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevicetime']['all']}</span>
+	                                                <span class="title">每台设备{$type}记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevicetime']['comeing']}</span>
+	                                                <span class="title">每台设备{$type}来电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevicetime']['outgoing']}</span>
+	                                                <span class="title">每台设备{$type}去电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevicetime']['missed']}</span>
+	                                                <span class="title">每台设备{$type}未接</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number" style="font-size: 14px;">{$data['bydevicetime']['audio']}</span>
+	                                                <span class="title">每台设备{$type}音频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-download"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['message']}</span>
+	                                                <span class="title">每台设备{$type}留言</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-shopping-bag"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['vedio']}</span>
+	                                                <span class="title">每台设备{$type}视频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['call_time']}</span>
+	                                                <span class="title">每台设备{$type}通话时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-eye"></i></span>
+	                                            <p>
+	                                                <span class="number">{$data['bydevicetime']['recording_time']}</span>
+	                                                <span class="title">每台设备{$type}录音时间</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart5" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+            			</div>
+            		</div>
+            	</div>
+            </div>	
+        </div>
+    </div>
+</div>
+<script src="__ROOT__/public/echarts/dist/echarts.js"></script>
+<script type="text/javascript">
+	var type = "{$type}";
+	 require.config({
+            paths: {
+                echarts: 'public/echarts/dist'
+            }
+        });
+	 	//权限设备数量处理
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/bar',
+                'echarts/chart/pie',
+            ],
+            function (ec) {
+               
+                var myChart1 = ec.init(document.getElementById('headline-chart1'),'dark');
+                var all = "{$logs['all']}";
+                var comeing = "{$logs['comeing']}";
+                var outgoing = "{$logs['outgoing']}";
+                var missed = "{$logs['missed']}";
+                var audio = "{$logs['audio']}";
+                var message = "{$logs['message']}";
+                var vedio = "{$logs['vedio']}";
+                var option =  {
+		            title: {
+		                text: '所有记录统计',
+		                align:'center'
+		            },
+		            tooltip: {
+		            	trigger: 'item',
+        				formatter: "{a} <br/>{b} : {c} ({d}%)",
+		            },
+		            legend: {
+		            	left: 'left',
+		            	// orient: 'vertical',
+		            	
+		                data: ["来电记录","去电记录","未接记录","音频记录",'留言记录','视频记录']
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar','pie']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            series: [{
+		                name: '记录条数',
+		                type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '60%'],
+			            data:[
+			                {value:comeing, name:'来电记录'},
+			                {value:outgoing, name:'去电记录'},
+			                {value:missed, name:'未接记录'},
+			                {value:audio, name:'音频记录'},
+			                {value:message, name:'留言记录'},
+			                {value:vedio, name:'视频记录'},
+			            ],
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+		            }]
+		        };
+                myChart1.setOption(option);
+
+                var myChart = ec.init(document.getElementById('headline-chart'),'dark');
+                var all = "{$times.all}";
+                var comeing = "{$times.comeing}";
+                var outgoing = "{$times.outgoing}";
+                var missed = "{$times.missed}";
+                var audio = "{$times.audio}";
+                var message = "{$times.message}";
+                var vedio = "{$times.vedio}";
+                var recording_time = "{$times.recording_time}";
+                var call_time = "{$times.call_time}";
+            	var option = {
+		            title: {
+		                text: type+'平均记录统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:["条数"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: [type+"记录",type+"来电",type+"去电",type+"未接",type+'音频',type+'留言',type+'视频',type+'通话/小时',type+'录音/小时']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, comeing, outgoing,missed,audio,message,vedio,call_time,recording_time]
+		            }]
+		        };
+
+		        myChart.setOption(option);
+
+		        var myChart4 = ec.init(document.getElementById('headline-chart4'));
+		        var all = "{$device.all}";
+                var comeing = "{$device.comeing}";
+                var outgoing = "{$device.outgoing}";
+                var missed = "{$device.missed}";
+                var audio = "{$device.audio}";
+                var message = "{$device.message}";
+                var vedio = "{$device.vedio}";
+                var recording_time = "{$device.recording_time}";
+                var call_time = "{$device.call_time}";
+            	var option = {
+		            title: {
+		                text: '每台设备记录统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:["条数"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["记录","来电","去电","未接",'音频','留言','视频','通话/小时','录音/小时']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, comeing, outgoing,missed,audio,message,vedio,call_time,recording_time]
+		            }]
+		        };
+
+		        myChart4.setOption(option);
+		        var myChart5 = ec.init(document.getElementById('headline-chart5'));
+		         var all = "{$devicetime.all}";
+                var comeing = "{$devicetime.comeing}";
+                var outgoing = "{$devicetime.outgoing}";
+                var missed = "{$devicetime.missed}";
+                var audio = "{$devicetime.audio}";
+                var message = "{$devicetime.message}";
+                var vedio = "{$devicetime.vedio}";
+                var recording_time = "{$devicetime.recording_time}";
+                var call_time = "{$devicetime.call_time}";
+            	var option = {
+		            title: {
+		                text: '每台设备'+type+'记录统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:["条数"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["记录","来电","去电","未接",'音频','留言','视频','通话/小时','录音/小时']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, comeing, outgoing,missed,audio,message,vedio,call_time,recording_time]
+		            }]
+		        };
+
+		        myChart5.setOption(option);
+		        var myChart3 = ec.init(document.getElementById('headline-chart3'));
+		        var call_time = "{$data['all']['call_time']}";
+		        var record_time = "{$data['all']['recording_time']}";
+		        var call_time_t = "{$data['bytime']['call_time']}";
+		        var record_time_t = "{$data['bytime']['recording_time']}";
+		        var call_time_d = "{$data['bydevice']['call_time']}"; 
+		        var record_time_d = "{$data['bydevice']['recording_time']}"; 
+		        var call_time_d_t = "{$data['bydevicetime']['call_time']}"; 
+		        var record_time_d_t = "{$data['bydevicetime']['recording_time']}"; 
+		        var option = {
+		        	 title: {
+		                text: '通话时长/录音时长统计'
+		            },
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				     
+				    legend: {
+				    	left: 'left',
+				        data:["总时长","平均"+type+"时长","平均设备时长","平均设备"+type+"时长"]
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['通话','录音']
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'总时长',
+				            type:'bar',
+				            data:[call_time, record_time]
+				        },
+				        {
+				            name:'平均'+type+'时长',
+				            type:'bar',
+				            data:[call_time_t, record_time_t]
+				        },
+				       	{
+				            name:'平均'+type+'时长',
+				            type:'bar',
+				            data:[call_time_d, record_time_d]
+				        },{
+				            name:'平均设备'+type+'时长',
+				            type:'bar',
+				            data:[call_time_d_t, record_time_d_t]
+				        },
+				        
+				    ]
+				};
+				console.log(option);
+				myChart3.setOption(option);
+
+				var myChart2 = ec.init(document.getElementById('headline-chart2'));
+
+				var option = <?php echo $data['option'] ?>;
+				console.log(option);
+				myChart2.setOption(option);
+            }
+
+        );
+	
+</script>

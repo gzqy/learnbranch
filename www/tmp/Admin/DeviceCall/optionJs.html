@@ -1,0 +1,94 @@
+<script>
+    //JSON对象fruit_variety模拟Ajax数据源
+    var fruit_variety = [{fruitID:1,fruitName:"苹果"},{fruitID:2,fruitName:"梨"},{fruitID:3,fruitName:"西瓜"},{fruitID:4,fruitName:"哈密瓜"},{fruitID:5,fruitName:"草莓"},{fruitID:6,fruitName:"龙眼"},{fruitID:7,fruitName:"火龙果"},{fruitID:8,fruitName:"樱桃"},{fruitID:9,fruitName:"橘子"},{fruitID:10,fruitName:"水蜜桃"}];
+</script>
+<script type="text/javascript" src="./public/public/jquery/jquery-1.7.2.min.js"></script>
+<script>
+    $(function(){
+        //生成多选下拉
+        function multiSelect(obj1,obj2){
+            for(var i=0;i<obj2.length;i++){
+                var input = document.createElement('input');
+                input.setAttribute('type','checkbox');
+                input.setAttribute('name','fruit_name');
+                input.setAttribute('id',obj2[i].fruitID);
+                input.setAttribute('value',obj2[i].fruitID);
+                var label = document.createElement('label');
+                label.setAttribute('for',obj2[i].fruitID);
+                label.innerHTML = obj2[i].fruitName;
+                var li = document.createElement('li');
+                li.append(input);
+                li.append(label);
+                $(obj1).append(li);
+            }
+            var btn = document.createElement('input');
+            btn.setAttribute("type","button");
+            btn.className = 'select_ok1';
+            btn.setAttribute("value","确定");
+            var p = document.createElement('p');
+            p.className = 'txt_p';
+            p.append(btn);
+            $(obj1).parent().append(p);
+        }
+        multiSelect('.multiFruit1',fruit_variety);
+        $(document).click(function(){
+            $('.multiFruit1').hide();//隐藏下拉框
+            $('.txt_p').hide();//隐藏确认按钮
+            $('.multiFruit1 input').attr('checked',false);
+            var v = $('#fruits').val();
+            if(v != ''){
+                //获取保存的选中值,并保存默认选中
+                var selectedNum = v.split(',');
+                for(var i=0;i < selectedNum.length;i++){
+                    for(var j=0;j<$('.multiFruit1 input').size();j++){
+                        if($('.multiFruit1 input').eq(j).val() == selectedNum[i]){
+                            $('.multiFruit1 input').eq(j).attr("checked",true);
+                        }
+                    }
+                }
+            }
+        })
+        $('.box1').click(function(e){
+            e = e || window.event;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }else{
+                e.cancelBubble = true; //IE
+            }
+            var w = $('.multiFruit1').innerWidth();
+            var t = $('.multiFruit1').innerHeight() + $('.fruit1_ul1').innerHeight();
+            $('.txt_p').css('width',w);
+            $('.txt_p').css('top',t);
+            $('.multiFruit1').show();
+        })
+        $('.fruit1_ul1').click(function(){
+            $('.txt_p').show();
+        })
+        $('.select_ok1').click(function(e){
+            e = e || window.event;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }else{
+                e.cancelBubble = true; //IE
+            }
+            $('.multiFruit1').hide();
+            $('.txt_p').hide();
+            var value = '';
+            var str = '';
+            //将选中的值保存到value
+            for(var i=0;i<$('input[name="fruit_name"]').size();i++){
+                if($('input[name="fruit_name"]').eq(i).attr('checked')){
+                    value += ',' + $('input[name="fruit_name"]').eq(i).attr('value');
+                    str += ',' + $('input[name="fruit_name"]').eq(i).siblings('label').html();
+                }
+            }
+            //采用substr去除第一个逗号分隔符
+            value = value.substr(1);
+            str = str.substr(1);
+            //将value的值赋值给input隐藏域
+            $('#fruits').val(value);
+            //将str的值赋值给显示框隐藏域
+            $('.fruit1_ul1').html(str);
+        })
+    })
+</script>

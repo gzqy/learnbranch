@@ -1,0 +1,403 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/css/main.css">
+</head>
+<div class="content" style="background-color: #fff;">
+    <div class="con">
+    	<dl class="nav" >
+            <dt><b>●</b>数据统计</dt>
+            <foreach name="second_nav" item="vo">
+            	<if condition="$second_nav_id eq $vo['id']">
+            		<dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+            	<else />
+            		<dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+            	</if>
+            </foreach>
+            
+        </dl>
+
+        <div class="right" >
+        	<div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                    	<foreach name="third_nav" item="vo">
+                    		<if condition="$third_nav_id eq $vo['id']">
+                    			<div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">{$vo.name}</a></span>
+	                            </div>
+                    		<else/>
+                    			<div class="aps-tab-label  aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="{$vo.a}">{$vo.name}</a></span>
+	                            </div>
+                    		</if>
+                    	</foreach>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wrapper">
+            	<div class="main" style="width:100%;">
+            		<div class="main-content">
+            			<div class="container-fluid">
+            				<div class="panel panel-headline">
+            					<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">权限设备</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_devices.total}</span>
+	                                                <span class="title">设备总数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-caret-up"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_devices.inline}</span>
+	                                                <span class="title">在线设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-caret-down"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_devices.out}</span>
+	                                                <span class="title">离线设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_devices.round}%</span>
+	                                                <span class="title">设备在线率</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart2" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">所有设备</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$devices.total}</span>
+	                                                <span class="title">所有设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-registered"></i></span>
+	                                            <p>
+	                                                <span class="number">{$devices.registered}</span>
+	                                                <span class="title">注册设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-cc-discover"></i></span>
+	                                            <p>
+	                                                <span class="number">{$devices.unregistered}</span>
+	                                                <span class="title">未注册设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-window-close"></i></span>
+	                                            <p>
+	                                                <span class="number">{$devices.closed}</span>
+	                                                <span class="title">关闭设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$devices.round}%</span>
+	                                                <span class="title">设备使用率</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart1" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">端口记录</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-outdent"></i></span>
+	                                            <p>
+	                                                <span class="number">{$lines.comeing}</span>
+	                                                <span class="title">平均来电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-compress"></i></span>
+	                                            <p>
+	                                                <span class="number">{$lines.outgoing}</span>
+	                                                <span class="title">平均去电</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-window-close"></i></span>
+	                                            <p>
+	                                                <span class="number">{$lines.missed}</span>
+	                                                <span class="title">平均未接</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-file-audio-o"></i></span>
+	                                            <p>
+	                                                <span class="number">{$lines.audio}</span>
+	                                                <span class="title">平均音频</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-wordpress"></i></span>
+	                                            <p>
+	                                                <span class="number">{$lines.message}</span>
+	                                                <span class="title">平均留言</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" >
+	                                        <div id="headline-chart" class="ct-chart" style="height:300px;"></div>
+	                                    </div>
+	                                    <div class="col-md-3">
+                                        <div class="weekly-summary text-right">
+                                            <span class="number">{$lines.total}</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i></span>
+                                            <span class="info-label">总端口数</span>
+                                        </div>
+                                        <div class="weekly-summary text-right">
+                                            <span class="number">{$lines.avge}</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i></span>
+                                            <span class="info-label">设备平均端口</span>
+                                        </div>
+                                        <div class="weekly-summary text-right">
+                                            <span class="number">{$lines.all}</span> <span class="percentage"><i class="fa fa-caret-down text-danger"></i></span>
+                                            <span class="info-label">平均记录</span>
+                                        </div>
+                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+            			</div>
+            		</div>
+            	</div>
+            </div>	
+        </div>
+    </div>
+</div>
+<script src="__ROOT__/public/echarts/dist/echarts.js"></script>
+<script type="text/javascript">
+	 require.config({
+            paths: {
+                echarts: 'public/echarts/dist'
+            }
+        });
+	 	//权限设备数量处理
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/bar',
+                'echarts/chart/pie',
+            ],
+            function (ec) {
+                var myChart2 = ec.init(document.getElementById('headline-chart2'),'dark');
+                var all = "{$account_devices['total']}";
+                var inline = "{$account_devices['inline']}";
+                var out = "{$account_devices['out']}";
+                var option = {
+		            title: {
+		                text: '权限设备在线数量'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:['数量']
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["全部设备","在线设备","离线设备"]
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, inline, out]
+		            }]
+		        };
+                myChart2.setOption(option);
+                var myChart1 = ec.init(document.getElementById('headline-chart1'),'dark');
+                var all = "{$devices['total']}";
+                var registered = "{$devices['registered']}";
+                var unregistered = "{$devices['unregistered']}";
+                var closed = "{$devices['closed']}";
+                var option =  {
+		            title: {
+		                text: '所有设备查看',
+		                align:'center'
+		            },
+		            tooltip: {
+		            	trigger: 'item',
+        				formatter: "{a} <br/>{b} : {c} ({d}%)",
+		            },
+		            legend: {
+		            	left: 'left',
+		            	// orient: 'vertical',
+		            	
+		                data: ["所有设备","注册设备","未注册设备","关闭设备"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar','pie']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            series: [{
+		                name: '设备数量',
+		                type: 'pie',
+			            radius : '55%',
+			            center: ['50%', '60%'],
+			            data:[
+			                {value:all, name:'所有设备'},
+			                {value:registered, name:'注册设备'},
+			                {value:unregistered, name:'未注册设备'},
+			                {value:closed, name:'关闭设备'},
+			            ],
+			            itemStyle: {
+			                emphasis: {
+			                    shadowBlur: 10,
+			                    shadowOffsetX: 0,
+			                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+			                }
+			            }
+		            }]
+		        };
+                myChart1.setOption(option);
+
+                var myChart = ec.init(document.getElementById('headline-chart'),'dark');
+                var all = "{$lines.all}";
+                var comeing = "{$lines.comeing}";
+                var outgoing = "{$lines.outgoing}";
+                var missed = "{$lines.missed}";
+                var audio = "{$lines.audio}";
+                var message = "{$lines.message}";
+                var vedio = "{$lines.vedio}";
+            	var option = {
+		            title: {
+		                text: '端口平均记录统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:["条数"]
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["平均记录","平均来电","平均去电","平均未接",'平均音频','平均留言','平均视频']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, comeing, outgoing,missed,audio,message,vedio]
+		            }]
+		        };
+
+		        myChart.setOption(option);
+
+
+		        
+            }
+
+        );
+	
+</script>
+<script type="text/javascript">
+    function togle(obj){
+
+        var class1 = obj.children("i").attr('class');
+        
+            if(obj.children("i").is(".fa-chevron-up")){
+                obj.children("i").attr('class','fa fa-chevron-down');
+            }else{
+                obj.children("i").attr('class','fa fa-chevron-up');
+            }
+        
+        par = obj.parent().next().slideToggle();
+
+    }
+</script>

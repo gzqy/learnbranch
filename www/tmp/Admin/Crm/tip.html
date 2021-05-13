@@ -1,0 +1,34 @@
+<div id="crm_tip" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-front _dialog_tip ui-dialog-buttons" tabindex="-1"
+     role="dialog" aria-describedby="_dialog_tip" aria-labelledby="ui-id-1"
+     style="height: auto; width: 400px; top: 226.5px; left: 300px; display: none; z-index: 111;">
+    <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" style="display: none;">
+        <span
+                id="crm_tip_ui-id-1" class="ui-dialog-title">&nbsp;</span>
+        <button type="button"
+                class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ui-dialog-titlebar-close"
+                role="button" title="Close">
+            <span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+            <span
+                    class="ui-button-text">Close</span>
+        </button>
+    </div>
+    <div id="crm_tip_dialog_tip" class="ui-dialog-content ui-widget-content"
+         style="width: auto; min-height: 13px; max-height: none; height: auto;">
+        <p><br/><b>已经拨号，弹屏<span id="timeout1">6</span>秒后请拿起听筒！
+            <span id="timeout2">6</span>秒后自动消失!<br/>
+            </b><b id="crm_tip_content">undefined</b></p>
+    </div>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <div class="ui-dialog-buttonset">
+            <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button">
+                <span onclick="$('#crm_tip').hide();$('#crm_tip_z_index').hide()" class="ui-button-text">确定</span>
+            </button>
+            <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button">
+                <span onclick="$('#crm_tip').hide();$('#crm_tip_z_index').hide();cancelDialed()" class="ui-button-text">取消拨号</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="crm_tip_z_index" class="ui-widget-overlay ui-front" style="display:none; z-index: 109;"></div>

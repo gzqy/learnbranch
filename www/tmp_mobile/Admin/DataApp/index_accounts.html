@@ -1,0 +1,510 @@
+<include file = "./tmp_mobile/Admin/Public/common.html" />
+<include file = "./tmp_mobile/Admin/Public/list.html" />
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/css/main.css">
+</head>
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:1216px;">
+    	<!--<dl class="nav" >-->
+            <!--<dt><b>●</b>数据统计</dt>-->
+            <!--<foreach name="second_nav" item="vo">-->
+            	<!--<if condition="$second_nav_id eq $vo['id']">-->
+            		<!--<dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>-->
+            	<!--<else />-->
+            		<!--<dd><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>-->
+            	<!--</if>-->
+            <!--</foreach>-->
+            <!---->
+        <!--</dl>-->
+
+        <div class="right" >
+        	<div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                    	<foreach name="third_nav" item="vo">
+                    		<if condition="$third_nav_id eq $vo['id']">
+                    			<div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">{$vo.name}</a></span>
+	                            </div>
+                    		<else/>
+                    			<div class="aps-tab-label  aps-tab-label-col-5">
+	                                <span class="aps-tab-label-inner"><a class="tabs" href="{$vo.a}">{$vo.name}</a></span>
+	                            </div>
+                    		</if>
+                    	</foreach>
+                    </div>
+                </div>
+            </div>
+
+            <div id="wrapper">
+            	<div class="main" style="width:100%;">
+            		<div class="main-content">
+            			<div class="container-fluid">
+            				<div class="panel panel-headline">
+            					<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">账号统计</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$accounts.total}</span>
+	                                                <span class="title">账号总数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-line-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$accounts.inline}</span>
+	                                                <span class="title">在线账号</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-toggle-off"></i></span>
+	                                            <p>
+	                                                <span class="number">{$accounts.out}</span>
+	                                                <span class="title">离线账号</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
+	                                            <p>
+	                                                <span class="number">{$accounts.round}</span>
+	                                                <span class="title">账号在线率</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart2" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">账号日志</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['total']}</span>
+	                                                <span class="title">总操作次数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-modx"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['months']}</span>
+	                                                <span class="title">总记录月份</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-sun-o"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['days']}</span>
+	                                                <span class="title">总记录天数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['avgeday']}</span>
+	                                                <span class="title">月平均操作</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass-end"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['avgeday']}</span>
+	                                                <span class="title">日平均操作</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass-half"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['max']['date']}</span>
+	                                                <span class="title">操作最多月</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass-start"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['max']['count']}</span>
+	                                                <span class="title">月最多操作数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['min']['date']}</span>
+	                                                <span class="title">操作最少月</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-minus"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['min']['count']}</span>
+	                                                <span class="title">月最少操作数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-minus-circle"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['month']['avgeaccountday']}</span>
+	                                                <span class="title">单账号月平均操作</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                               	 <div class="row">
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass-half"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['max']['date']}</span>
+	                                                <span class="title">操作最多日</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass-start"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['max']['count']}</span>
+	                                                <span class="title">日最多操作数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-hourglass"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['min']['date']}</span>
+	                                                <span class="title">操作最少日</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-minus"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['min']['count']}</span>
+	                                                <span class="title">日最少操作数</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:20%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-minus-circle"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_logs['day']['avgeaccountday']}</span>
+	                                                <span class="title">单账号日平均操作</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart1" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                        <div id="headline-chart3" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+	                        <div class="panel panel-headline">
+	                        	<div class="panel-body">
+	                                <h4 style="width:auto;display: inline-block;">账号关注</h4>
+	                                <a href="javascript:;" style="text-decoration: none;display: inline-block;background: 0 0;float: right;font-size: 18px;" onclick="togle($(this))"><i class="fa fa-chevron-up"></i></a>
+	                            </div>
+	                            <div class="panel-body">
+	                                <div class="row">
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_attentios.total_device}</span>
+	                                                <span class="title">总关注设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bars"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_attentios.avge_device}</span>
+	                                                <span class="title">平均关注设备</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                    <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-google-wallet"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_attentios.total_log}</span>
+	                                                <span class="title">总关注记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                     <div class="col-md-3" style="width:25%;">
+	                                        <div class="metric">
+	                                            <span class="icon"><i class="fa fa-bars"></i></span>
+	                                            <p>
+	                                                <span class="number">{$account_attentios.avge_log}</span>
+	                                                <span class="title">平均关注记录</span>
+	                                            </p>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-md-9" style="width:100%;">
+	                                        <div id="headline-chart" class="ct-chart" style="width:100%;height:300px;"></div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+
+            			</div>
+            		</div>
+            	</div>
+            </div>	
+        </div>
+    </div>
+</div>
+<script src="__ROOT__/public/echarts/dist/echarts.js"></script>
+<script type="text/javascript">
+	 require.config({
+            paths: {
+                echarts: 'public/echarts/dist'
+            }
+        });
+	 	//权限设备数量处理
+        require(
+            [
+                'echarts',
+                'echarts/chart/line',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts/chart/bar',
+                'echarts/chart/pie',
+            ],
+            function (ec) {
+                var myChart2 = ec.init(document.getElementById('headline-chart2'),'dark');
+                var all = "{$accounts['total']}";
+                var inline = "{$accounts['inline']}";
+                var out = "{$accounts['out']}";
+                var option = {
+		            title: {
+		                text: '账号统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:['数量']
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["全部账号","在线账号","离线账号"]
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, inline, out]
+		            }]
+		        };
+                myChart2.setOption(option);
+                var myChart1 = ec.init(document.getElementById('headline-chart1'),'dark');
+                var myChart3 = ec.init(document.getElementById('headline-chart3'),'dark');
+
+                var all = "{$account_logs['month']['total']}";
+                var months = "{$account_logs['month']['months']}";
+                var max_month = "{$account_logs['month']['max']['month']}";
+                var max_count = "{$account_logs['month']['max']['count']}";
+                var min_month = "{$account_logs['month']['min']['month']}";
+                var min_count = "{$account_logs['month']['min']['count']}";
+                var avge = "{$account_logs['month']['avgeday']}";
+                var avgeaccountday = "{$account_logs['month']['avgeaccountday']}";
+                var option = {
+		            title: {
+		                text: '日志操作按月统计'
+		            },
+		            tooltip: {},
+		            legend: {
+		                data:['次数']
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["全部日志","记录月份","单月操作最多",'单月操作最少','月平均操作','单账号月平均操作']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, months,max_count,min_count,avge,avgeaccountday]
+		            }]
+		        };
+		        myChart1.setOption(option);
+		        var all = "{$account_logs['day']['total']}";
+                var months = "{$account_logs['day']['days']}";
+                var max_month = "{$account_logs['day']['max']['month']}";
+                var max_count = "{$account_logs['day']['max']['count']}";
+                var min_month = "{$account_logs['day']['min']['month']}";
+                var min_count = "{$account_logs['day']['min']['count']}";
+                var avge = "{$account_logs['day']['avgeday']}";
+                var avgeaccountday = "{$account_logs['day']['avgeaccountday']}";
+		        var option = {
+		            title: {
+		                text: '日志操作按日统计'
+		            },
+		            color: ['#c23531'],
+		            
+		            tooltip: {},
+		            legend: {
+		                data:['次数']
+		            },
+		             toolbox: {
+		                show : true,
+		                feature : {
+		                    mark : {show: true},
+		                    dataView : {show: true, readOnly: false},
+		                    magicType : {show: true, type: ['line', 'bar']},
+		                    restore : {show: true},
+		                    saveAsImage : {show: true}
+		                }
+		            },
+		            xAxis: {
+		                data: ["全部日志","记录天数","单日操作最多",'单日操作最少','日平均操作','单账号日平均操作']
+		            },
+		            yAxis: {},
+		            series: [{
+		                name: '数量',
+		                type: 'bar',
+		                data: [all, months,max_count,min_count,avge,avgeaccountday]
+		            }]
+		        };
+		        myChart3.setOption(option);
+
+		        var myChart = ec.init(document.getElementById('headline-chart'),'dark');
+		        var total_device = "{$account_attentios['total_device']}";
+		        var total_log = "{$account_attentios['total_log']}";
+		        var avge_device = "{$account_attentios['avge_device']}";
+		        var avge_log = "{$account_attentios['avge_log']}";
+		        var option = {
+		        	 title: {
+		                text: '管理员关注数据统计'
+		            },
+				    tooltip : {
+				        trigger: 'axis',
+				        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+				            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				        }
+				    },
+				     
+				    legend: {
+				    	left: 'left',
+				        data:["全部","平均"]
+				    },
+				    xAxis : [
+				        {
+				            type : 'category',
+				            data : ['关注设备','关注记录']
+				        }
+				    ],
+				    yAxis : [
+				        {
+				            type : 'value'
+				        }
+				    ],
+				    series : [
+				        {
+				            name:'全部',
+				            type:'bar',
+				            data:[total_device, total_log]
+				        },
+				        {
+				            name:'平均',
+				            type:'bar',
+				            data:[avge_device, avge_log]
+				        },
+				       
+				        
+				    ]
+				};
+				 myChart.setOption(option);
+            }
+
+        );
+	
+</script>
+<script type="text/javascript">
+    function togle(obj){
+
+        var class1 = obj.children("i").attr('class');
+        
+            if(obj.children("i").is(".fa-chevron-up")){
+                obj.children("i").attr('class','fa fa-chevron-down');
+            }else{
+                obj.children("i").attr('class','fa fa-chevron-up');
+            }
+        
+        par = obj.parent().next().slideToggle();
+
+    }
+</script>

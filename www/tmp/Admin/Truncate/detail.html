@@ -1,0 +1,101 @@
+<include file = "./tmp/Admin/Public/common.html" />
+<include file = "./tmp/Admin/Public/list.html" />
+<style type="text/css">
+.history {
+    width: 1000px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 60px;
+    margin:0 auto;
+    margin-top:30px;
+    height: 550px;
+    overflow-y:scroll;
+}
+.history .ls:nth-of-type(odd) {
+    background: #f6f6f6;
+    color:#111;
+}
+.history .ls:nth-of-type(even) {
+    background: #fff;
+    color:#000;
+}
+.history .ls{
+    width:100%;
+}
+.history .ls div{
+    border: 1px solid #DBDBD9;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+.metric{
+        padding:50px;
+    }
+.audioplayer{
+    margin-top:30px;
+}
+</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/linearicons/style.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/vendor/chartist/css/chartist-custom.css">
+    <link rel="stylesheet" href="__ROOT__/public/assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" href="./public/audio/AudioPlayer/css/audioplayer.css" />
+
+<div class="content" style="background-color: #fff;">
+    <div class="con" style="width:100%;">
+        <dl class="nav">
+            <dt><b>●</b>语音转写</dt>
+            <foreach name="second_nav" item="vo">
+                <if condition="$vo.id eq $second_nav_id">
+                    <dd class="bg"><a href="javascript:;"><b>●</b>{$vo.name}</a></dd>
+                <else />
+                    <dd ><a href="{$vo.a}"><b>●</b>{$vo.name}</a></dd>
+                </if>
+            </foreach>
+            
+        </dl>
+        <div class="right">
+            <div class="aps-tab-bar aps-tab-bar-type-card aps-tab-bar-align-left aps-tab-bar-size-small">
+                <div class="aps-tab-bar-wrapper" style="width: 100%;">
+                    <div class="aps-tab-item-wrapper">
+                        <div class="aps-tab-label  aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="{:U('Truncate/index')}">转写列表</a></span>
+                        </div>
+                        <div class="aps-tab-label aps-tab-label-active aps-tab-label-col-5">
+                            <span class="aps-tab-label-inner"><a class="tabs" href="javascript:;">转写详情</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {$id}
+            <div class="center history indexhistory">
+                <foreach   name="content" item="val">
+                <div class="ls">
+                        <div class="l"><i></i><em></em>
+                            <p>{$val}</p>
+                        </div>
+                </div>
+                </foreach>
+            </div>
+                    <audio preload="auto" controls>
+                        <source src="{$file}">
+                    </audio>
+        </div>
+    </div>
+</div>
+<script>
+    /*
+        VIEWPORT BUG FIX
+        iOS viewport scaling bug fix, by @mathias, @cheeaun and @jdalton
+    */
+    (function(doc){var addEvent='addEventListener',type='gesturestart',qsa='querySelectorAll',scales=[1,1],meta=qsa in doc?doc[qsa]('meta[name=viewport]'):[];function fix(){meta.content='width=device-width,minimum-scale='+scales[0]+',maximum-scale='+scales[1];doc.removeEventListener(type,fix,true);}if((meta=meta[meta.length-1])&&addEvent in doc){fix();scales=[.25,1.6];doc[addEvent](type,fix,true);}}(document));
+</script>
+<script src="./public/audio/AudioPlayer/js/audioplayer.js"></script>
+<script>
+    $( function() { $( 'audio' ).audioPlayer(); } );
+</script>

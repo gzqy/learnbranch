@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>语音转换测试</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" action="{:U('Index/doTruncate')}">
+	<input type="file" name="files"><br/>
+	采样率<select name="type">
+		<option value="sms8k">8k</option>
+		<option value="sms16k">16k</option>
+	</select><br/>
+	<input type="submit" name="" value="提交">	
+</form>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<div class="footer"> &copy; 2015-2026 <a href="http://www.tp-shop.cn" target="_blank">www.xfrec.com</a> 先锋音讯出品</div>

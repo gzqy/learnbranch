@@ -1,0 +1,251 @@
+
+    <style>
+        /**, body, ul, li, h1, h2 {*/
+            /*margin: 0;*/
+            /*padding: 0;*/
+            /*list-style: none;*/
+        /*}*/
+
+        body {
+            /*overflow:scroll;*/
+            /*font: 12px "宋体";*/
+            /*padding-top: 20px;*/
+        }
+        #menu {
+            width: 100%;
+            margin: auto;
+        }
+
+        #menu h1 {
+            cursor: pointer;
+            color: #777;
+            font-size: 13px;
+            padding: 5px 0 3px 10px;
+            border: #E7E7E7 1px solid;
+            border-top-color: #FFF;
+            /*background-color: #00C1DE;*/
+            background-color: wheat;
+        }
+
+        #menu h2 {
+            cursor: pointer;
+            color: #777;
+            font-size: 12px;
+            padding: 5px 0 3px 10px;
+            border: #E7E7E7 1px solid;
+            border-top-color: #FFF;
+            background-color: #F4F4F4;
+        }
+
+        #menu ul {
+            padding-left: 15px;
+            height: 60px;
+            border: #E7E7E7 1px solid;
+            border-top: none;
+            overflow: auto;
+		
+        }
+
+        #menu ul li {
+            padding: 5px 0 3px 10px;
+
+        }
+
+        .no {
+            display: none;
+        }
+		.lss{
+		display: none;
+		}
+    </style>
+
+
+     
+
+
+    <script language="JavaScript">
+        function myFunction() {
+            // 声明变量
+            var input, filter, ul, ls, a, i;
+            input = document.getElementById('myInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById("myUL");
+            ls = document.getElementsByClassName('ls');
+
+            // 循环所有列表，查找匹配项
+            for (i = 0; i < ls.length; i++) {
+                a = ls[i].getElementsByClassName('lss')[0];
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    ls[i].style.display = "";
+                    ls[i].style.border="solid 1px red";
+                } else {
+                    ls[i].style.display = "none";
+                }
+            }
+        }
+
+        function ShowMenu(obj, noid) {
+            var block = document.getElementById(noid);
+            var n = noid.substr(noid.length - 3);
+            n = parseInt(n);
+			noid.length = 7;
+            if (noid.length == 8) {
+                var ul = document.getElementById(noid.substring(0, 5)).getElementsByTagName("ul");
+                var h2 = document.getElementById(noid.substring(0, 5)).getElementsByTagName("h2");
+                for (var i = 0; i < h2.length; i++) {
+//                    h2[i].innerHTML = h2[i].innerHTML.replace("-", "+");
+                    h2[i].style.color = "";
+                }
+
+                obj.style.color = "purple";
+//                for (var i = 0; i < ul.length; i++) {
+//                    if (i != n) {
+//                        ul[i].className = "no";
+//                    }
+//                }
+            } else {
+                var div = document.getElementById("menu").getElementsByTagName("span");
+                var h1 = document.getElementById("menu").getElementsByTagName("h1");
+                for (var i = 0; i < h1.length; i++) {
+                    h1[i].innerHTML = h1[i].innerHTML.replace("-", "+");
+                    h1[i].style.color = "";
+                }
+//                obj.style.color = "#0000FF";
+                obj.style.color = "#00C1DE";
+//                for (var i = 0; i < div.length; i++) {
+//                    if (i != n) {
+//                        div[i].className = "no";
+//                    }
+//                }
+            }
+		 block.className = "no1";
+            if (block.className == "no") {
+                $("#" + noid).attr("class", "no");
+                block.className = "";
+                obj.innerHTML = obj.innerHTML.replace("+", "-");
+            } else {
+                block.className = "no";
+                obj.style.color = "";
+                obj.innerHTML = obj.innerHTML.replace("-", "+");
+            }
+        }
+        function selectAllLine(object) {
+            var input = object.parentNode.getElementsByTagName('input')
+            var ischecked = object.checked
+            for (var i = 0; i < input.length; i++) {
+                var obj = input[i];
+                //判断是否是checkbox并且已经选中
+                if (obj.type == "checkbox") {
+                    if (ischecked == true) {
+                        obj.checked = true
+                    } else {
+                        obj.checked = false
+                    }
+//                    if (obj.checked) {
+//                        obj.checked = false
+//                    } else {
+//                        obj.checked = true
+//                    }
+                }
+            }
+        }
+
+
+        function Show_Hidden(obj)
+        {
+            if(obj.style.display=="block")
+            {
+                obj.style.display='none';
+            }
+            else
+            {
+                obj.style.display='block';
+            }
+        }
+        window.onload=function()
+        {
+            var olink=document.getElementById("link");
+            var odiv=document.getElementById("thediv");
+            olink.onclick=function()
+            {
+                Show_Hidden(odiv);
+                return false;
+            }
+        }
+
+
+    </script>
+    <script language="JavaScript">
+        $(function () {
+            $("#searchBox").keyup(function () {
+                var value = $(this).val();
+                $(".dataSet .lss").each(function () {
+                    $(this).hide();
+					 $("input[type='checkbox']").removeAttr('checked');
+			
+					
+						
+						
+					
+                    if ($(this).text().indexOf($.trim(value)) >= 0) {
+					
+                        $(this).show();
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <div style="border-bottom: 1px dashed #ddd;padding-left: 8px">
+
+
+    展示城市：<button   class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-btn aps-btn-normal aps-size-small btn float-btn"  id="link" >查看/关闭 </button>
+        设备搜索：  <input type="text" id="searchBox"  placeholder="搜索..."
+                      class="aps-ani-transition aps-widget aps-corner-tl aps-corner-tr aps-corner-bl aps-corner-br aps-input aps-size-small">
+
+
+
+
+    </div>
+
+
+    <div id="thediv"   style="display: none;" >
+
+<!--       -->
+		<div id="menu" style="border-bottom: 1px dashed #ddd;">
+
+		<?php $no1=0; foreach($deviceLines as $groupId => $deviceLineArr){ ++$no1;?>
+			<div class="dataSet" >
+				<h1 style="font-size: 14px" onClick="javascript:ShowMenu(this,'NO<?php echo sprintf('%03s',$no1); ?>')">
+					<?php if(!in_array($groupId,$checkedDeviceGroup)){echo " + " ;}else{echo " - ";} echo $groupName[$groupId] ?></h1>
+			   
+						<span id="NO<?php echo sprintf('%03s',$no1);?>" <?php if(!in_array($groupId,$checkedDeviceGroup)){ ?>    <?php }?>>
+						 <?php $no2=0; foreach($deviceLineArr as $deviceId => $deviceLines){ ++$no2; ?>
+
+
+								<h2  class="lss"  onClick="javascript:ShowMenu(this,'NO<?php echo sprintf('%03s',$no1) . sprintf('%03s',$no2);?>')"><?php if(!in_array($deviceId,$checkedDeviceId)){echo " + ";}else{echo " - ";} echo $codeList[$deviceId] . "" . $deviceName[$deviceId] ?></h2>
+									<ul id="NO<?php echo sprintf('%03s',$no1) . sprintf('%03s',$no2);?>" <?php if(!in_array($deviceId,$checkedDeviceId)){ ?> class="no" <?php }?>>
+										<li>
+											<input type="checkbox" onclick="selectAllLine(this)" value="" style="margin-left: 10px">全选/全不选
+											<?php foreach($deviceLines as $lineId){?>
+											<input name="lineIds[]"
+												   style="margin-left: 10px" type="checkbox" value="<?=$lineId?>"
+											<?php if(in_array($lineId,$lineIds)) echo "checked";?>
+											><?php echo sprintf("%04s",$lineCode[$lineId]) . "({$lineName[$lineId]})"; ?>
+											<?php }?>
+										</li>
+									</ul>
+						
+
+							<?php }?>
+						</span>
+
+			</div>
+
+		<?php }?>
+		</div>
+	</div>
+
+
+

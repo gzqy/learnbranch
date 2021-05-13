@@ -1,0 +1,32 @@
+/* commentList */
+.comment-wd{ background:none; padding-bottom:10px;}
+.comment-wd .commentNum{ margin:0 15px; padding-top:10px; border-bottom: 1px solid #4c4c4c; font-size:14px ; line-height: 22px;}
+.comment-wd .commentNum a{color:#4c4c4c;} 
+.comment-wd .commentNum span{font-weight: bold;}
+.commentList{ clear:both;}
+.commentList ul{ list-style:none; margin:0 15px 0 15px; }
+._comment_replays_box{ border-bottom: 1px #d4d4d4 dotted;}
+.commentList ul li{ padding-top:9px; clear:both;}
+.commentList ul li .lfloat{ float:left; margin-right:10px;}
+.commentList ul li .rPanel{ }
+.commentList ul li .rPanel .CommentTime{ font-weight:normal; font-size:12px; color:#999}
+.commentList ul li .rPanel .CommentActorCT{word-wrap:break-word; padding-left:40px; position:relative}
+
+.commentList ul li .rPanel .CommentActorCT .CommentActorName{ font-size:14px; margin-right:5px; font-weight:bold; color:#000}
+.commentList ul li .rPanel .CommentActorCT .CommentActorName a{ color:#333}
+.commentList ul li .rPanel .CommentActorCT .CommentActorName:hover{text-decoration: underline;}
+.commentList ul ul.ReplyList{ padding:0 8px 8px 25px; margin-right:-10px}
+.commentList ul ul.ReplyList .comment-datail textarea{ width:82%;}
+.commentList ul li .editBox{ position:absolute; right:-14px; top:3px; display:none; width:15px;}
+.commentList ul li .editBox a{ margin-bottom:10px;}
+.commentList ul li:hover .editBox{ display:block}
+
+.comment-datail{}
+.comment-datail textarea{ font-size:12px; line-height:18px; outline:medium none; overflow-x:hidden; overflow-y:auto; word-wrap:break-word; width:85%; height:74px; border:1px solid #d4d4d4; padding:5px; resize:none;}
+.sent-wd{ clear:both; margin:10px 0 0 40px;}
+
+.CommentTime a{color:#009383;}
+._comment_post{color:#fff; background-color: #009383; height:34px; border: none; width:80px; margin-right: 10px; cursor: pointer;}
+._comment_cancel{color:#fff; background-color: #767676; height:34px; border: none; width:80px; margin-right: 10px; cursor: pointer;}
+.alt_delete{float:right; margin-right: 20px; height:14px; width: 14px; z-index: 9999;}
+.alt_delete img{height:100%; }
